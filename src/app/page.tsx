@@ -1,9 +1,5 @@
-import Category from "@/components/Category";
+import BoardWrapper from "@/components/Board";
 
 export default function Home() {
-    return (
-        <div className="w-full h-full">
-            <Category />
-        </div>
-    );
+    return <BoardWrapper />;
 }
