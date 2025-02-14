@@ -4,7 +4,12 @@ interface ButtonProps {
 
 const Button: React.FC<ButtonProps> = ({ title }) => {
     return (
-        <button className="grow p-1.5 hover:bg-gray-200 border border-slate-300">{title}</button>
+        <div className="relative group">
+            <button className="p-1.5 text-lg font-semibold">{title}</button>
+            <div className="w-32 p-4 absolute hidden group-hover:flex mt-0.5 rounded-xl bg-slate-200">
+                안녕하세요
+            </div>
+        </div>
     );
 };
 

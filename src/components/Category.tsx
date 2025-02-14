@@ -4,7 +4,7 @@ const CategoryTitles: string[] = ["최신 소식", "장비 정보", "커뮤니�
 
 const Category: React.FC = () => {
     return (
-        <div className="w-full flex-center border-b border-gray-300 text-lg">
+        <div className="hidden lg:flex items-center justify-center text-lg gap-10">
             {CategoryTitles.map((title) => (
                 <Button key={title} title={title} />
             ))}
