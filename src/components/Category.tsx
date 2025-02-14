@@ -12,4 +12,4 @@ const Category: React.FC = () => {
     );
 };
 
-export default Category;
+export { Category, CategoryTitles };
