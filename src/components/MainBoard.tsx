@@ -1,14 +1,14 @@
 const MainBoard = () => {
     return (
-        <div className="grow p-4 grid sm:grid-rows-3">
+        <div className="grow px-4 pb-2 grid sm:grid-rows-3">
+            <div className="sm:row-span-2 grid grid-cols-1 sm:grid-cols-2">
+                <EventBoard />
+                <MonthlyBoard />
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-3">
                 <PopularBoard />
                 <NewsBoard />
                 <RankingBoard />
-            </div>
-            <div className="sm:row-span-2 grid grid-cols-1 sm:grid-cols-2">
-                <EventBoard />
-                <MonthlyBoard />
             </div>
         </div>
     );
