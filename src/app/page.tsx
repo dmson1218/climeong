@@ -1,5 +1,5 @@
-import BoardWrapper from "@/components/Board";
+import MainBoard from "@/components/Board";
 
 export default function Home() {
-    return <BoardWrapper />;
+    return <MainBoard />;
 }
