@@ -1,12 +1,12 @@
 const MainBoard = () => {
     return (
         <div className="grow p-4 grid sm:grid-rows-3">
-            <div className="grid grid-cols-1 sm:grid-cols-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3">
                 <PopularBoard />
                 <NewsBoard />
                 <RankingBoard />
             </div>
-            <div className="row-span-0 sm:row-span-2 grid grid-cols-1 sm:grid-cols-2">
+            <div className="sm:row-span-2 grid grid-cols-1 sm:grid-cols-2">
                 <EventBoard />
                 <MonthlyBoard />
             </div>
@@ -14,17 +14,8 @@ const MainBoard = () => {
     );
 };
 
-const BoardWrapper: React.FC<{ children: React.ReactNode; rowStart?: number }> = ({
-    children,
-    rowStart,
-}) => {
-    return (
-        <div
-            className={`sm:col-span-${rowStart} p-4 m-2 rounded border border-gray-300 flex-center`}
-        >
-            {children}
-        </div>
-    );
+const BoardWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    return <div className="p-4 m-2 rounded border-2 border-slate-300 flex-center">{children}</div>;
 };
 
 const PopularBoard = () => {
@@ -61,7 +52,7 @@ const NewsBoard = () => {
 
 const RankingBoard = () => {
     return (
-        <BoardWrapper rowStart={2}>
+        <BoardWrapper>
             <div className="flex-center flex-col gap-2">
                 <div className="text-xl font-semibold">최근 검색어 랭킹</div>
                 <div className="grow">

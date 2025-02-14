@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Category from "@/components/Category";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
     title: "My Next.js App",
@@ -22,6 +23,7 @@ export default function RootLayout({
                     <Category />
                 </div>
                 {children}
+                <Footer />
             </body>
         </html>
     );
