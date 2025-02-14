@@ -13,8 +13,8 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="ko">
-            <body className="h-screen flex flex-col">
-                <header className="h-[10%] flex-center text-2xl border-b border-gray-500">
+            <body className="w-screen h-screen flex flex-col">
+                <header className="h-[10%] flex-center text-2xl border-b border-gray-300">
                     클라이멍
                 </header>
                 {children}
