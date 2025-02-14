@@ -1,10 +1,8 @@
 import Button from "./Button";
 
-interface CategoryProps {
-    titles: string[];
-}
+const titles: string[] = ["클라이밍 뉴스", "장비 정보", "커뮤니티", "크루 홍보"];
 
-const Category: React.FC<CategoryProps> = ({ titles }) => {
+const Category: React.FC = () => {
     return (
         <div className="w-full flex-center grow border-b border-gray-300">
             {titles.map((title) => (
