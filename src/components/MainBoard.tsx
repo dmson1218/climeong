@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const MainBoard = () => {
     return (
         <div className="grow px-4 grid sm:grid-rows-3">
@@ -22,7 +24,7 @@ const PopularBoard = () => {
     return (
         <BoardWrapper>
             <div className="flex-center flex-col gap-2">
-                <div className="text-xl font-semibold">인기 글</div>
+                <div className="text-xl">인기 글</div>
                 <div className="grow">
                     <div>1. 첫 번째 글</div>
                     <div>2. 두 번째 글</div>
@@ -38,7 +40,7 @@ const NewsBoard = () => {
     return (
         <BoardWrapper>
             <div className="flex-center flex-col gap-2">
-                <div className="text-xl font-semibold">최신 소식</div>
+                <div className="text-xl">최신 소식</div>
                 <div className="grow">
                     <div>1. 첫 번째 글</div>
                     <div>2. 두 번째 글</div>
@@ -54,7 +56,7 @@ const RankingBoard = () => {
     return (
         <BoardWrapper>
             <div className="flex-center flex-col gap-2">
-                <div className="text-xl font-semibold">최근 검색어 랭킹</div>
+                <div className="text-xl">최근 검색어 랭킹</div>
                 <div className="grow">
                     <div>1. 첫 번째 글</div>
                     <div>2. 두 번째 글</div>
@@ -70,13 +72,7 @@ const EventBoard = () => {
     return (
         <BoardWrapper>
             <div className="flex-center flex-col gap-2">
-                <div className="text-xl font-semibold">이벤트</div>
-                <div className="grow">
-                    <div>1. 첫 번째 글</div>
-                    <div>2. 두 번째 글</div>
-                    <div>3. 세 번째 글</div>
-                    <div>4. 네 번째 글</div>
-                </div>
+                <Image src="/images/theclimb.png" alt="event" width={300} height={200} />
             </div>
         </BoardWrapper>
     );
@@ -86,7 +82,7 @@ const MonthlyBoard = () => {
     return (
         <BoardWrapper>
             <div className="flex-center flex-col gap-2">
-                <div className="text-xl font-semibold">이달의 클라이머</div>
+                <div className="text-xl">이달의 클라이머</div>
                 <div className="grow">
                     <div>1. 첫 번째 글</div>
                     <div>2. 두 번째 글</div>
