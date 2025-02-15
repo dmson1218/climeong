@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import { Category } from "@/components/Category";
@@ -19,7 +20,9 @@ export default function RootLayout({
             <body className="min-h-screen flex flex-col font-reko">
                 <div className="h-20 pt-3 flex justify-between">
                     <div className="w-32 ml-4 flex-center">
-                        <div className="text-2xl cursor-pointer">클라이멍</div>
+                        <Link href="/" className="text-2xl cursor-pointer">
+                            클라이멍
+                        </Link>
                     </div>
                     <Category />
                     <MenuBar />
