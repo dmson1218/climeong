@@ -27,9 +27,9 @@ const MenuBar = () => {
                     {CategoryTitles.map((title) => (
                         <li
                             key={title}
-                            className="pl-10 py-5 rounded text-lg hover:bg-gray-100 cursor-pointer"
+                            className="pl-10 py-5 rounded hover:bg-gray-100 cursor-pointer"
                         >
-                            {title}
+                            <div className="pt-1.5 text-lg">{title}</div>
                         </li>
                     ))}
                 </ul>
