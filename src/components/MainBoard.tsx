@@ -17,20 +17,22 @@ const MainBoard = () => {
 };
 
 const BoardWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    return <div className="p-4 m-2 rounded border-2 border-slate-300 flex-center">{children}</div>;
+    return (
+        <div className="p-4 m-2 rounded border-2 border-slate-300 flex-center">
+            <div className="flex-center flex-col gap-2">{children}</div>
+        </div>
+    );
 };
 
 const PopularBoard = () => {
     return (
         <BoardWrapper>
-            <div className="flex-center flex-col gap-2">
-                <div className="text-xl">인기 글</div>
-                <div className="grow">
-                    <div>1. 첫 번째 글</div>
-                    <div>2. 두 번째 글</div>
-                    <div>3. 세 번째 글</div>
-                    <div>4. 네 번째 글</div>
-                </div>
+            <div className="text-xl">인기 글</div>
+            <div className="grow">
+                <div>1. 첫 번째 글</div>
+                <div>2. 두 번째 글</div>
+                <div>3. 세 번째 글</div>
+                <div>4. 네 번째 글</div>
             </div>
         </BoardWrapper>
     );
@@ -39,14 +41,12 @@ const PopularBoard = () => {
 const NewsBoard = () => {
     return (
         <BoardWrapper>
-            <div className="flex-center flex-col gap-2">
-                <div className="text-xl">최신 소식</div>
-                <div className="grow">
-                    <div>1. 첫 번째 글</div>
-                    <div>2. 두 번째 글</div>
-                    <div>3. 세 번째 글</div>
-                    <div>4. 네 번째 글</div>
-                </div>
+            <div className="text-xl">최신 소식</div>
+            <div className="grow">
+                <div>1. 첫 번째 글</div>
+                <div>2. 두 번째 글</div>
+                <div>3. 세 번째 글</div>
+                <div>4. 네 번째 글</div>
             </div>
         </BoardWrapper>
     );
@@ -55,14 +55,12 @@ const NewsBoard = () => {
 const RankingBoard = () => {
     return (
         <BoardWrapper>
-            <div className="flex-center flex-col gap-2">
-                <div className="text-xl">최근 검색어 랭킹</div>
-                <div className="grow">
-                    <div>1. 첫 번째 글</div>
-                    <div>2. 두 번째 글</div>
-                    <div>3. 세 번째 글</div>
-                    <div>4. 네 번째 글</div>
-                </div>
+            <div className="text-xl">최근 검색어 랭킹</div>
+            <div className="grow">
+                <div>1. 첫 번째 글</div>
+                <div>2. 두 번째 글</div>
+                <div>3. 세 번째 글</div>
+                <div>4. 네 번째 글</div>
             </div>
         </BoardWrapper>
     );
@@ -71,9 +69,7 @@ const RankingBoard = () => {
 const EventBoard = () => {
     return (
         <BoardWrapper>
-            <div className="flex-center flex-col gap-2">
-                <Image src="/images/theclimb.png" alt="event" width={300} height={200} />
-            </div>
+            <Image src="/images/theclimb.png" alt="event" width={300} height={200} />
         </BoardWrapper>
     );
 };
@@ -81,14 +77,12 @@ const EventBoard = () => {
 const MonthlyBoard = () => {
     return (
         <BoardWrapper>
-            <div className="flex-center flex-col gap-2">
-                <div className="text-xl">이달의 클라이머</div>
-                <div className="grow">
-                    <div>1. 첫 번째 글</div>
-                    <div>2. 두 번째 글</div>
-                    <div>3. 세 번째 글</div>
-                    <div>4. 네 번째 글</div>
-                </div>
+            <div className="text-xl">이달의 클라이머</div>
+            <div className="grow">
+                <div>1. 첫 번째 글</div>
+                <div>2. 두 번째 글</div>
+                <div>3. 세 번째 글</div>
+                <div>4. 네 번째 글</div>
             </div>
         </BoardWrapper>
     );
