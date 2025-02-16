@@ -1,16 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { categories } from "./Category";
 
 const MenuBar = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [isAnimating, setIsAnimating] = useState(false);
     const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
     const toggleMenu = () => {
-        setIsAnimating(true);
         setIsOpen((prev) => !prev);
     };
 
@@ -18,28 +16,24 @@ const MenuBar = () => {
         setActiveCategory((prev) => (prev === title ? null : title));
     };
 
-    useEffect(() => {
-        if (!isOpen) {
-            setIsAnimating(false);
-        }
-    }, [isOpen]);
-
     return (
-        <div className="visible lg:invisible w-32 mx-2 flex items-center justify-end">
-            <Image
-                src={isOpen ? "/icons/close.png" : "/icons/menu.png"}
-                alt="menu"
-                width={22}
-                height={22}
-                className="pb-2 mr-6 cursor-pointer"
-                onClick={toggleMenu}
-            />
+        <>
+            <div className="visible lg:invisible w-32 mx-2 flex items-center justify-end">
+                <Image
+                    src={isOpen ? "/icons/close.png" : "/icons/menu.png"}
+                    alt="menu"
+                    width={22}
+                    height={22}
+                    className="pb-2 mr-6 cursor-pointer"
+                    onClick={toggleMenu}
+                />
+            </div>
             <div
-                className={`absolute lg:hidden w-full top-20 right-0 bg-white shadow-lg rounded-lg transition-all duration-500 transform ${
+                className={`absolute lg:hidden w-full top-20 right-0 bg-white transition-all duration-500 transform ${
                     isOpen ? "translate-y-0 opacity-100 z-20" : "-translate-y-5 opacity-0 z-10"
-                } ${isAnimating ? "z-20" : "z-0"}`}
+                }`}
             >
-                <ul className="h-[calc(100vh-5rem)] pt-8 space-y-4">
+                <ul className="h-[calc(100vh-5rem)] pt-4 space-y-4">
                     {categories.map(({ title, subItems }) => (
                         <li
                             key={title}
@@ -69,7 +63,7 @@ const MenuBar = () => {
                     ))}
                 </ul>
             </div>
-        </div>
+        </>
     );
 };
 

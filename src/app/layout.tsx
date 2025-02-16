@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="ko">
-            <body className="min-h-screen flex flex-col font-reko">
+            <body className="h-screen flex flex-col font-reko">
                 <div className="h-20 pt-3 flex justify-between">
                     <div className="w-32 ml-4 flex-center">
                         <Link href="/" className="text-2xl cursor-pointer">
