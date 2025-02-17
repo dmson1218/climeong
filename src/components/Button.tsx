@@ -17,13 +17,9 @@ const Button: React.FC<ButtonProps> = ({ title, link, subItems, subItemLinks }) 
 
     return (
         <div className="relative" onMouseLeave={() => setIsHovered(false)}>
-            <Link
-                href={link || "#"}
-                className="m-1.5 text-lg"
-                onMouseEnter={() => setIsHovered(true)}
-            >
-                {title}
-            </Link>
+            <div className="m-1.5 text-lg" onMouseEnter={() => setIsHovered(true)}>
+                <Link href={link || "#"}>{title}</Link>
+            </div>
             {hasSubItems && (
                 <div
                     className={`absolute top-10 w-32 p-4 rounded-xl bg-slate-100
