@@ -2,21 +2,28 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { ComponentPropsWithoutRef } from "react";
 
-interface ButtonProps {
+interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
     title: string;
+    link?: string;
     subItems?: string[];
+    subItemLinks?: string[];
 }
 
-const Button: React.FC<ButtonProps> = ({ title, subItems }) => {
+const Button: React.FC<ButtonProps> = ({ title, link, subItems, subItemLinks }) => {
     const [isHovered, setIsHovered] = useState(false);
     const hasSubItems = subItems && subItems.length > 0;
 
     return (
         <div className="relative" onMouseLeave={() => setIsHovered(false)}>
-            <button className="m-1.5 text-lg" onMouseEnter={() => setIsHovered(true)}>
+            <Link
+                href={link || "#"}
+                className="m-1.5 text-lg"
+                onMouseEnter={() => setIsHovered(true)}
+            >
                 {title}
-            </button>
+            </Link>
             {hasSubItems && (
                 <div
                     className={`absolute top-10 w-32 p-4 rounded-xl bg-slate-100
@@ -30,7 +37,7 @@ const Button: React.FC<ButtonProps> = ({ title, subItems }) => {
                         `}
                 >
                     {subItems.map((item, index) => (
-                        <Link key={index} href={`/${item}`}>
+                        <Link key={item} href={subItemLinks?.[index] || "#"}>
                             {item}
                         </Link>
                     ))}
@@ -40,4 +47,5 @@ const Button: React.FC<ButtonProps> = ({ title, subItems }) => {
     );
 };
 
-export default Button;
+export type { ButtonProps };
+export { Button };
