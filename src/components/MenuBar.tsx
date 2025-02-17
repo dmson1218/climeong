@@ -33,7 +33,7 @@ const MenuBar = () => {
                     isOpen ? "translate-y-0 opacity-100 z-20" : "-translate-y-5 opacity-0 z-10"
                 }`}
             >
-                <ul className="h-[calc(100vh-5rem)] pt-4 space-y-4">
+                <ul className="h-[calc(100vh-5rem)] pt-5 space-y-4">
                     {categories.map(({ title, subItems }) => (
                         <li
                             key={title}
