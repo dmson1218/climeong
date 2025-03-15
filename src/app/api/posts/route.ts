@@ -33,7 +33,11 @@ export async function GET(request: Request) {
         }
         const collection = db.collection(collectionName);
 
-        const posts = await collection.find().sort({ createdAt: -1 }).limit(count).toArray();
+        const posts = await collection
+            .find({}, { projection: { title: 1, createdAt: 1 } })
+            .sort({ createdAt: -1 })
+            .limit(count)
+            .toArray();
 
         return new Response(JSON.stringify(posts), { status: 200 });
     } catch (error) {
