@@ -18,15 +18,14 @@ const client = new MongoClient(uri, {
         deprecationErrors: true,
     },
 });
+const clientPromise = client.connect();
 
 export async function GET(request: Request) {
     const url = new URL(request.url);
     const count = Number(url.searchParams.get("count") || 10);
-    // const page = Number(url.searchParams.get("page") || 1);
-    // const skip = (page - 1) * count;
 
     try {
-        await client.connect();
+        const client = await clientPromise;
         const db = client.db(process.env.DB_NAME);
         const collectionName = process.env.COLLECTION_NAME;
         if (!collectionName) {
@@ -34,12 +33,7 @@ export async function GET(request: Request) {
         }
         const collection = db.collection(collectionName);
 
-        const posts = await collection
-            .find()
-            .sort({ createdAt: -1 })
-            // .skip(skip)
-            .limit(count)
-            .toArray();
+        const posts = await collection.find().sort({ createdAt: -1 }).limit(count).toArray();
 
         return new Response(JSON.stringify(posts), { status: 200 });
     } catch (error) {
@@ -47,8 +41,6 @@ export async function GET(request: Request) {
         return new Response(JSON.stringify({ error: "게시물을 가져오는 데 실패했습니다." }), {
             status: 500,
         });
-    } finally {
-        await client.close();
     }
 }
 
@@ -63,7 +55,7 @@ export async function POST(request: Request) {
             );
         }
 
-        await client.connect();
+        const client = await clientPromise;
         const db = client.db(process.env.DB_NAME);
         const collectionName = process.env.COLLECTION_NAME;
         if (!collectionName) {
@@ -91,7 +83,5 @@ export async function POST(request: Request) {
         return new Response(JSON.stringify({ error: "게시물 생성에 실패했습니다." }), {
             status: 500,
         });
-    } finally {
-        await client.close();
     }
 }
