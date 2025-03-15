@@ -1,4 +1,38 @@
+"use client";
+
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { Post } from "../app/api/posts/route";
+
+interface NewsBoardProps {
+    count: number;
+}
+
+const NewsBoard: React.FC<NewsBoardProps> = ({ count }) => {
+    const [news, setNews] = useState<Post[]>([]);
+
+    useEffect(() => {
+        fetch("/api/posts?count=" + count)
+            .then((res) => res.json())
+            .then((data) => {
+                setNews(data);
+            });
+    }, [count]);
+
+    return (
+        <BoardWrapper>
+            <div className="sm:my-3 flex-center text-xl mb-3 sm:mb-4">최신 소식</div>
+            <div className="flex flex-col gap-1">
+                {news.length > 0 &&
+                    news.map((post) => (
+                        <div key={post._id} className="flex-center">
+                            {post.title}
+                        </div>
+                    ))}
+            </div>
+        </BoardWrapper>
+    );
+};
 
 const MainBoard = () => {
     return (
@@ -9,7 +43,7 @@ const MainBoard = () => {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3">
                 <PopularBoard />
-                <NewsBoard />
+                <NewsBoard count={4} />
                 <RankingBoard />
             </div>
         </div>
@@ -18,8 +52,8 @@ const MainBoard = () => {
 
 const BoardWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     return (
-        <div className="p-4 m-2 rounded border-2 border-slate-300 flex-center">
-            <div className="flex-center flex-col gap-2">{children}</div>
+        <div className="grow px-8 py-4 m-2 rounded border-2 border-slate-300 flex flex-col">
+            {children}
         </div>
     );
 };
@@ -27,26 +61,12 @@ const BoardWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 const PopularBoard = () => {
     return (
         <BoardWrapper>
-            <div className="text-xl">인기 글</div>
-            <div className="grow">
-                <div>1. 첫 번째 글</div>
-                <div>2. 두 번째 글</div>
-                <div>3. 세 번째 글</div>
-                <div>4. 네 번째 글</div>
-            </div>
-        </BoardWrapper>
-    );
-};
-
-const NewsBoard = () => {
-    return (
-        <BoardWrapper>
-            <div className="text-xl">최신 소식</div>
-            <div className="grow">
-                <div>1. 첫 번째 글</div>
-                <div>2. 두 번째 글</div>
-                <div>3. 세 번째 글</div>
-                <div>4. 네 번째 글</div>
+            <div className="sm:my-3 flex-center text-xl mb-3 sm:mb-4">인기 글</div>
+            <div className="flex flex-col gap-1">
+                <div className="flex-center">1. 첫 번째 글</div>
+                <div className="flex-center">2. 두 번째 글</div>
+                <div className="flex-center">3. 세 번째 글</div>
+                <div className="flex-center">4. 네 번째 글</div>
             </div>
         </BoardWrapper>
     );
@@ -55,12 +75,12 @@ const NewsBoard = () => {
 const RankingBoard = () => {
     return (
         <BoardWrapper>
-            <div className="text-xl">최근 검색어 랭킹</div>
-            <div className="grow">
-                <div>1. 첫 번째 글</div>
-                <div>2. 두 번째 글</div>
-                <div>3. 세 번째 글</div>
-                <div>4. 네 번째 글</div>
+            <div className="sm:my-3 flex-center text-xl mb-3 sm:mb-4">검색어 랭킹</div>
+            <div className="flex flex-col gap-1">
+                <div className="flex-center">1. 첫 번째 글</div>
+                <div className="flex-center">2. 두 번째 글</div>
+                <div className="flex-center">3. 세 번째 글</div>
+                <div className="flex-center">4. 네 번째 글</div>
             </div>
         </BoardWrapper>
     );
@@ -69,7 +89,9 @@ const RankingBoard = () => {
 const EventBoard = () => {
     return (
         <BoardWrapper>
-            <Image src="/images/theclimb.png" alt="event" width={300} height={200} />
+            <div className="h-full flex-center">
+                <Image src="/images/theclimb.png" alt="event" width={300} height={200} />
+            </div>
         </BoardWrapper>
     );
 };
@@ -77,15 +99,15 @@ const EventBoard = () => {
 const MonthlyBoard = () => {
     return (
         <BoardWrapper>
-            <div className="text-xl">이달의 클라이머</div>
-            <div className="grow">
-                <div>1. 첫 번째 글</div>
-                <div>2. 두 번째 글</div>
-                <div>3. 세 번째 글</div>
-                <div>4. 네 번째 글</div>
+            <div className="sm:my-3 flex-center text-xl mb-3 sm:mb-4">이달의 클라이머</div>
+            <div className="flex flex-col gap-1">
+                <div className="flex-center">1. 첫 번째 글</div>
+                <div className="flex-center">2. 두 번째 글</div>
+                <div className="flex-center">3. 세 번째 글</div>
+                <div className="flex-center">4. 네 번째 글</div>
             </div>
         </BoardWrapper>
     );
 };
 
-export { MainBoard, NewsBoard };
+export { MainBoard, BoardWrapper, NewsBoard };
