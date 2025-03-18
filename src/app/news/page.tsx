@@ -19,7 +19,7 @@ export default function Home() {
     return (
         <div className="min-h-[calc(100vh-5rem-60px)] grid z-10 px-4">
             <BoardWrapper>
-                <div className="mt-3 mb-8 flex-center text-xl mb-4">최신 소식</div>
+                <div className="my-3 flex-center text-xl mb-4">최신 소식</div>
                 <div className="grow flex flex-col gap-1">
                     {news.length > 0 &&
                         news.map((post) => (
