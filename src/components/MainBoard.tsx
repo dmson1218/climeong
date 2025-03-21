@@ -36,7 +36,7 @@ const NewsBoard: React.FC<NewsBoardProps> = ({ count }) => {
 
 const MainBoard = () => {
     return (
-        <div className="min-h-[calc(100vh-5rem-60px)] px-4 grid sm:grid-rows-3 bg-white z-10">
+        <div className="min-h-[calc(100vh-5rem-60px)] px-4 grid sm:grid-rows-3 bg-white">
             <div className="sm:row-span-2 grid grid-cols-1 sm:grid-cols-2">
                 <EventBoard />
                 <MonthlyBoard />

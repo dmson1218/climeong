@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import "./globals.css";
+import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Category } from "@/components/Category";
-import MenuBar from "@/components/MenuBar";
 
 export const metadata: Metadata = {
     title: "My Next.js App",
@@ -17,16 +15,8 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="ko">
-            <body className="flex flex-col font-reko">
-                <div className="h-20 pt-3 flex justify-between">
-                    <div className="w-32 ml-4 flex-center">
-                        <Link href="/" className="text-2xl cursor-pointer">
-                            클라이멍
-                        </Link>
-                    </div>
-                    <Category />
-                    <MenuBar />
-                </div>
+            <body className="relative flex flex-col font-reko">
+                <Header />
                 {children}
                 <Footer />
             </body>
