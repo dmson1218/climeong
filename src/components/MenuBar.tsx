@@ -1,22 +1,41 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { HeaderProps } from "./Header";
 import { categories } from "./Category";
 
 const MenuBar: React.FC<HeaderProps> = ({ isOpen, setIsOpen }) => {
     const [activeCategory, setActiveCategory] = useState<string | null>(null);
+    const [showMenu, setShowMenu] = useState(false);
+    const [opacity, setOpacity] = useState(0);
 
     const toggleSubMenu = (title: string) => {
         setActiveCategory((prev) => (prev === title ? null : title));
     };
 
-    if (!isOpen) return null;
+    useEffect(() => {
+        if (isOpen) {
+            setShowMenu(true);
+            setTimeout(() => {
+                setOpacity(1);
+            }, 50);
+        } else {
+            setOpacity(0);
+            setTimeout(() => {
+                setShowMenu(false);
+            }, 500);
+        }
+    }, [isOpen]);
+
+    if (!showMenu) return null;
 
     return (
-        <div className="inset-0 fixed lg:invisible top-20 left-0 bg-white">
-            <ul className="pt-5">
+        <div
+            className="inset-0 fixed lg:invisible top-20 left-0 bg-white transition-opacity duration-500 ease-in-out"
+            style={{ opacity }}
+        >
+            <ul className="pt-5 bg-white">
                 {categories.map(({ title, link, subItems, subItemLinks }) => (
                     <li
                         key={title}
