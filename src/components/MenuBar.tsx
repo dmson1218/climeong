@@ -53,8 +53,14 @@ const MenuBar: React.FC<HeaderProps> = ({ isOpen, setIsOpen }) => {
                         >
                             <div className="pt-1.5 text-lg">{title}</div>
                         </Link>
-                        {subItems && subItemLinks && activeCategory === title && (
-                            <div className="overflow-hidden flex flex-col">
+                        {subItems && subItemLinks && (
+                            <div
+                                className={`overflow-hidden flex flex-col transition-all duration-500 ease-in-out ${
+                                    activeCategory === title
+                                        ? "max-h-60 opacity-100 transform translate-y-0"
+                                        : "max-h-0 opacity-0 transform -translate-y-2"
+                                }`}
+                            >
                                 {subItems.map((subItem, index) => (
                                     <Link
                                         key={subItem}
