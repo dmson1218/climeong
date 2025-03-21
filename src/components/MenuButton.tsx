@@ -5,7 +5,7 @@ import { HeaderProps } from "./Header";
 
 const MenuButton: React.FC<HeaderProps> = ({ isOpen, setIsOpen }) => {
     return (
-        <div className="visible lg:invisible w-32 mx-2 flex items-center justify-end">
+        <div className="lg:invisible w-32 mx-2 flex items-center justify-end">
             <Image
                 src={isOpen ? "/icons/close.png" : "/icons/menu.png"}
                 alt="menu"

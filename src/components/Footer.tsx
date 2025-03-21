@@ -1,5 +1,5 @@
 const Footer = () => (
-    <footer className="text-xs p-6 py-3 space-y-1 z-30 bg-white">
+    <footer className="text-xs p-6 py-3 space-y-1 bg-white">
         <div className="text-end">© 2025 Hyeonseo & Dongmin.</div>
         <div className="flex justify-end gap-2">
             <a href="mailto:dmson1218@naver.com" className="hover:underline">

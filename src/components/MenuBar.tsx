@@ -15,7 +15,7 @@ const MenuBar: React.FC<HeaderProps> = ({ isOpen, setIsOpen }) => {
     if (!isOpen) return null;
 
     return (
-        <div className="w-full inset-0 absolute top-20 right-0 bg-white">
+        <div className="inset-0 fixed lg:invisible top-20 left-0 bg-white">
             <ul className="pt-5">
                 {categories.map(({ title, link, subItems, subItemLinks }) => (
                     <li
