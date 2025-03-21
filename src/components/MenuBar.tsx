@@ -19,7 +19,7 @@ const MenuBar: React.FC<HeaderProps> = ({ isOpen, setIsOpen }) => {
             setShowMenu(true);
             setTimeout(() => {
                 setOpacity(1);
-            }, 50);
+            }, 80);
         } else {
             setOpacity(0);
             setTimeout(() => {
