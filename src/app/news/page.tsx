@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Post } from "./api/route";
-import { BoardWrapper } from "@/components/MainBoard";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { News } from "../api/news/route";
+import { BoardWrapper } from "@/components/MainBoard";
 
 export default function NewsPage() {
-    const [news, setNews] = useState<Post[]>([]);
+    const [newsList, setNewsList] = useState<News[]>([]);
     const [postsToShow, setPostsToShow] = useState<number>(10);
 
     const updatePostsToShow = () => {
@@ -24,7 +24,7 @@ export default function NewsPage() {
         fetch(`/news/api?count=10`)
             .then((res) => res.json())
             .then((data) => {
-                setNews(data);
+                setNewsList(data);
             });
 
         updatePostsToShow();
@@ -40,9 +40,9 @@ export default function NewsPage() {
             <BoardWrapper>
                 <div className="my-3 flex-center text-xl mb-4">최신 소식</div>
                 <div className="grow flex flex-col gap-1">
-                    {news.slice(0, postsToShow).map((post) => (
-                        <div key={post._id} className="flex-center">
-                            {post.title}
+                    {newsList.slice(0, postsToShow).map((news) => (
+                        <div key={news._id} className="flex-center">
+                            {news.title}
                         </div>
                     ))}
                 </div>

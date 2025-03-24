@@ -2,20 +2,20 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { Post } from "../app/news/api/route";
+import { News } from "../app/api/news/route";
 
 interface NewsBoardProps {
     count: number;
 }
 
 const NewsBoard: React.FC<NewsBoardProps> = ({ count }) => {
-    const [news, setNews] = useState<Post[]>([]);
+    const [newsList, setNewsList] = useState<News[]>([]);
 
     useEffect(() => {
         fetch("/news/api?count=" + count)
             .then((res) => res.json())
             .then((data) => {
-                setNews(data);
+                setNewsList(data);
             });
     }, [count]);
 
@@ -23,10 +23,10 @@ const NewsBoard: React.FC<NewsBoardProps> = ({ count }) => {
         <BoardWrapper>
             <div className="sm:my-3 flex-center text-xl mb-3 sm:mb-4">최신 소식</div>
             <div className="flex flex-col gap-1">
-                {news.length > 0 &&
-                    news.map((post) => (
-                        <div key={post._id} className="flex-center">
-                            {post.title}
+                {newsList.length > 0 &&
+                    newsList.map((news) => (
+                        <div key={news._id} className="flex-center">
+                            {news.title}
                         </div>
                     ))}
             </div>

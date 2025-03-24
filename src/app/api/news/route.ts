@@ -1,9 +1,10 @@
 import { getClient } from "@/database/dbClient";
 
-export interface Post {
+export interface News {
     _id: string;
     title: string;
     content: string;
+    createdAt: Date;
 }
 
 export async function GET(request: Request) {
@@ -19,13 +20,13 @@ export async function GET(request: Request) {
         }
         const collection = db.collection(collectionName);
 
-        const posts = await collection
+        const news = await collection
             .find({}, { projection: { title: 1, createdAt: 1 } })
             .sort({ createdAt: -1 })
             .limit(count)
             .toArray();
 
-        return new Response(JSON.stringify(posts), { status: 200 });
+        return new Response(JSON.stringify(news), { status: 200 });
     } catch (error) {
         console.error(error);
         return new Response(JSON.stringify({ error: "게시물을 가져오는 데 실패했습니다." }), {
@@ -53,24 +54,24 @@ export async function POST(request: Request) {
         }
         const collection = db.collection(collectionName);
 
-        const newPost = {
+        const newNews = {
             title: data.title,
             content: data.content,
             createdAt: new Date(),
         };
 
-        const result = await collection.insertOne(newPost);
+        const result = await collection.insertOne(newNews);
 
         return new Response(
             JSON.stringify({
-                message: "게시물이 성공적으로 생성되었습니다.",
+                message: "최신 소식이 성공적으로 생성되었습니다.",
                 postId: result.insertedId,
             }),
             { status: 201 }
         );
     } catch (error) {
         console.error(error);
-        return new Response(JSON.stringify({ error: "게시물 생성에 실패했습니다." }), {
+        return new Response(JSON.stringify({ error: "최신 소식 생성에 실패했습니다." }), {
             status: 500,
         });
     }
