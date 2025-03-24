@@ -14,7 +14,7 @@ export default function NewsCreatePage() {
         }
 
         try {
-            const response = await fetch("/api/posts", {
+            const response = await fetch("/api/news", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -36,7 +36,7 @@ export default function NewsCreatePage() {
     };
 
     return (
-        <div className="min-h-[calc(100vh-5rem-60px)] grid z-10 px-4">
+        <div className="min-h-[calc(100vh-5rem-60px)] mt-20 grid z-10 px-4">
             <BoardWrapper>
                 <div className="my-3 flex-center text-xl mb-4">최신 소식</div>
                 <div className="grow flex flex-col items-center gap-3">

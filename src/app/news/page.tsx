@@ -41,9 +41,13 @@ export default function NewsPage() {
                 <div className="my-3 flex-center text-xl mb-4">최신 소식</div>
                 <div className="grow flex flex-col gap-1">
                     {newsList.slice(0, postsToShow).map((news) => (
-                        <div key={news._id} className="flex-center">
+                        <Link
+                            key={news._id}
+                            href={`/news/${news._id}`}
+                            className="mx-auto flex-center"
+                        >
                             {news.title}
-                        </div>
+                        </Link>
                     ))}
                 </div>
                 <div className="flex justify-end">

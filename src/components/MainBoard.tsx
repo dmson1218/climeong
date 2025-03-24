@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { News } from "../app/api/news/route";
@@ -25,9 +26,13 @@ const NewsBoard: React.FC<NewsBoardProps> = ({ count }) => {
             <div className="flex flex-col gap-1">
                 {newsList.length > 0 &&
                     newsList.map((news) => (
-                        <div key={news._id} className="flex-center">
+                        <Link
+                            key={news._id}
+                            href={`/news/${news._id}`}
+                            className="mx-auto flex-center"
+                        >
                             {news.title}
-                        </div>
+                        </Link>
                     ))}
             </div>
         </BoardWrapper>

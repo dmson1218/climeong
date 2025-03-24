@@ -29,7 +29,7 @@ export async function GET(request: Request) {
         return new Response(JSON.stringify(news), { status: 200 });
     } catch (error) {
         console.error(error);
-        return new Response(JSON.stringify({ error: "게시물을 가져오는 데 실패했습니다." }), {
+        return new Response(JSON.stringify({ error: "최신 소식을 가져오는 데 실패했습니다." }), {
             status: 500,
         });
     }
