@@ -12,7 +12,7 @@ const NewsBoard: React.FC<NewsBoardProps> = ({ count }) => {
     const [newsList, setNewsList] = useState<News[]>([]);
 
     useEffect(() => {
-        fetch("/news/api?count=" + count)
+        fetch(`/api/news?count=${count}`)
             .then((res) => res.json())
             .then((data) => {
                 setNewsList(data);

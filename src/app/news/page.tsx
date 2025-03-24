@@ -21,7 +21,7 @@ export default function NewsPage() {
     };
 
     useEffect(() => {
-        fetch(`/news/api?count=10`)
+        fetch("/api/news?count=10")
             .then((res) => res.json())
             .then((data) => {
                 setNewsList(data);
