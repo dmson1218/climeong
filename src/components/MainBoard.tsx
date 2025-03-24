@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { Post } from "../app/api/posts/route";
+import { Post } from "../app/news/api/route";
 
 interface NewsBoardProps {
     count: number;
@@ -12,7 +12,7 @@ const NewsBoard: React.FC<NewsBoardProps> = ({ count }) => {
     const [news, setNews] = useState<Post[]>([]);
 
     useEffect(() => {
-        fetch("/api/posts?count=" + count)
+        fetch("/news/api?count=" + count)
             .then((res) => res.json())
             .then((data) => {
                 setNews(data);

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Post } from "../api/posts/route";
+import { Post } from "./api/route";
 import { BoardWrapper } from "@/components/MainBoard";
 import Link from "next/link";
 
@@ -21,7 +21,7 @@ export default function Home() {
     };
 
     useEffect(() => {
-        fetch(`/api/posts?count=10`)
+        fetch(`/news/api?count=10`)
             .then((res) => res.json())
             .then((data) => {
                 setNews(data);
