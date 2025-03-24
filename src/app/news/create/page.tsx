@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { BoardWrapper } from "@/components/MainBoard";
 
-export default function Home() {
+export default function NewsCreatePage() {
     const [title, setTitle] = useState<string>("");
     const [content, setContent] = useState<string>("");
 
