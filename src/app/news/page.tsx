@@ -5,7 +5,7 @@ import { Post } from "./api/route";
 import { BoardWrapper } from "@/components/MainBoard";
 import Link from "next/link";
 
-export default function Home() {
+export default function NewsPage() {
     const [news, setNews] = useState<Post[]>([]);
     const [postsToShow, setPostsToShow] = useState<number>(10);
 
