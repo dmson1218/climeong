@@ -15,7 +15,6 @@ export default function PostPage() {
                 const res = await fetch(`/api/news/${id}`);
                 if (!res.ok) throw new Error("게시물을 찾을 수 없습니다.");
                 const data = await res.json();
-                console.log(data);
                 setNews(data);
             } catch (error) {
                 console.error(error);
