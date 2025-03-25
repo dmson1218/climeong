@@ -12,7 +12,7 @@ export async function GET(request: Request) {
     try {
         const client = await getClient();
         const db = client.db(process.env.DB_NAME);
-        const collectionName = process.env.COLLECTION_NAME;
+        const collectionName = process.env.NEWS_COLLECTION_NAME;
         if (!collectionName) {
             throw new Error("COLLECTION_NAME이 정의되지 않았습니다.");
         }
