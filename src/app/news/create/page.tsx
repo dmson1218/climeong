@@ -42,18 +42,18 @@ export default function NewsCreatePage() {
                 <div className="grow flex flex-col items-center gap-3">
                     <input
                         type="text"
-                        className="w-full lg:w-3/4 border-2 border-slate-300 rounded p-2"
+                        className="w-full md:w-3/4 lg:w-3/5 border-2 border-slate-300 rounded p-2"
                         placeholder="제목을 입력해 주세요."
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                     />
                     <textarea
-                        className="w-full lg:w-3/4 grow border-2 border-slate-300 rounded p-2"
+                        className="w-full md:w-3/4 lg:w-3/5 grow border-2 border-slate-300 rounded p-2"
                         placeholder="내용을 입력해 주세요."
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
                     />
-                    <div className="w-full lg:w-3/4 flex justify-end">
+                    <div className="w-full md:w-3/4 lg:w-3/5 flex justify-end">
                         <button onClick={handleSubmit}>글쓰기</button>
                     </div>
                 </div>

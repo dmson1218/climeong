@@ -39,12 +39,12 @@ export default function NewsPage() {
         <div className="min-h-[calc(100vh-5rem-60px)] mt-20 grid px-4">
             <BoardWrapper>
                 <div className="my-3 flex-center text-xl mb-4">최신 소식</div>
-                <div className="grow flex flex-col gap-1">
+                <div className="grow flex flex-col items-center gap-1">
                     {newsList.slice(0, postsToShow).map((news) => (
                         <Link
                             key={news._id}
                             href={`/news/${news._id}`}
-                            className="mx-auto flex-center"
+                            className="w-full md:w-3/4 lg:w-3/5"
                         >
                             {news.title}
                         </Link>

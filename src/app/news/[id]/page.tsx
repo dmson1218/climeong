@@ -32,7 +32,7 @@ export default function PostPage() {
                     <>
                         <div className="my-3 flex-center text-xl mb-4">{news.title}</div>
                         <div className="grow flex flex-col items-center gap-3">
-                            <div className="w-full lg:w-3/4">
+                            <div className="w-full md:w-3/4 lg:w-3/5">
                                 <FormatContent content={news.content} />
                             </div>
                         </div>
