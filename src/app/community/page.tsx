@@ -43,7 +43,7 @@ export default function CommunityPage() {
                     {postList.slice(0, postsToShow).map((post) => (
                         <Link
                             key={post._id}
-                            href={`/post/${post._id}`}
+                            href={`/community/${post._id}`}
                             className="w-full md:w-3/4 lg:w-3/5 mx-auto flex justify-between p-3 rounded hover:bg-slate-100"
                         >
                             <div>{post.title}</div>
