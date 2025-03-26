@@ -44,9 +44,10 @@ export default function NewsPage() {
                         <Link
                             key={news._id}
                             href={`/news/${news._id}`}
-                            className="w-full md:w-3/4 lg:w-3/5"
+                            className="w-full md:w-3/4 lg:w-3/5 mx-auto flex justify-between p-3 rounded hover:bg-slate-100"
                         >
-                            {news.title}
+                            <div>{news.title}</div>
+                            <div>{new Date(news.createdAt).toLocaleDateString()}</div>
                         </Link>
                     ))}
                 </div>
