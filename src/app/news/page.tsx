@@ -51,7 +51,7 @@ export default function NewsPage() {
                         </Link>
                     ))}
                 </div>
-                <div className="flex justify-end">
+                <div className="w-full md:w-3/4 lg:w-3/5 mx-auto p-3 flex justify-end">
                     <Link href="/news/create">글쓰기</Link>
                 </div>
             </BoardWrapper>

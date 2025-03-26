@@ -38,8 +38,8 @@ export default function NewsCreatePage() {
     return (
         <div className="min-h-[calc(100vh-5rem-60px)] mt-20 grid z-10 px-4">
             <BoardWrapper>
-                <div className="my-3 flex-center text-xl mb-4">최신 소식</div>
-                <div className="grow flex flex-col items-center gap-3">
+                <div className="my-3 flex-center text-xl">최신 소식</div>
+                <div className="grow px-5 flex flex-col items-center gap-3">
                     <input
                         type="text"
                         className="w-full md:w-3/4 lg:w-3/5 border-2 border-slate-300 rounded p-2"
@@ -53,9 +53,9 @@ export default function NewsCreatePage() {
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
                     />
-                    <div className="w-full md:w-3/4 lg:w-3/5 flex justify-end">
-                        <button onClick={handleSubmit}>글쓰기</button>
-                    </div>
+                </div>
+                <div className="w-full md:w-3/4 lg:w-3/5 mx-auto p-3 flex justify-end">
+                    <button onClick={handleSubmit}>글쓰기</button>
                 </div>
             </BoardWrapper>
         </div>
