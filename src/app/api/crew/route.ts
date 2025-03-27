@@ -1,6 +1,6 @@
 import { getClient } from "@/database/dbClient";
 
-export interface Post {
+export interface Crew {
     _id: string;
     title: string;
     content: string;
@@ -14,22 +14,22 @@ export async function GET(request: Request) {
     try {
         const client = await getClient();
         const db = client.db(process.env.DB_NAME);
-        const collectionName = process.env.COMMUNITY_COLLECTION_NAME;
+        const collectionName = process.env.CREW_COLLECTION_NAME;
         if (!collectionName) {
             throw new Error("COLLECTION_NAME이 정의되지 않았습니다.");
         }
         const collection = db.collection(collectionName);
 
-        const postList = await collection
+        const crewList = await collection
             .find({}, { projection: { title: 1, createdAt: 1 } })
             .sort({ createdAt: -1 })
             .limit(count)
             .toArray();
 
-        return new Response(JSON.stringify(postList), { status: 200 });
+        return new Response(JSON.stringify(crewList), { status: 200 });
     } catch (error) {
         console.error(error);
-        return new Response(JSON.stringify({ error: "게시물을 가져오는 데 실패했습니다." }), {
+        return new Response(JSON.stringify({ error: "크루 홍보를 가져오는 데 실패했습니다." }), {
             status: 500,
         });
     }
@@ -48,30 +48,30 @@ export async function POST(request: Request) {
 
         const client = await getClient();
         const db = client.db(process.env.DB_NAME);
-        const collectionName = process.env.COMMUNITY_COLLECTION_NAME;
+        const collectionName = process.env.CREW_COLLECTION_NAME;
         if (!collectionName) {
             throw new Error("COLLECTION_NAME이 정의되지 않았습니다.");
         }
         const collection = db.collection(collectionName);
 
-        const newPost = {
+        const newCrew = {
             title: data.title,
             content: data.content,
             createdAt: new Date(),
         };
 
-        const result = await collection.insertOne(newPost);
+        const result = await collection.insertOne(newCrew);
 
         return new Response(
             JSON.stringify({
-                message: "게시물이 성공적으로 생성되었습니다.",
+                message: "크루 홍보가 성공적으로 생성되었습니다.",
                 postId: result.insertedId,
             }),
             { status: 201 }
         );
     } catch (error) {
         console.error(error);
-        return new Response(JSON.stringify({ error: "게시물 생성에 실패했습니다." }), {
+        return new Response(JSON.stringify({ error: "크루 홍보 생성에 실패했습니다." }), {
             status: 500,
         });
     }
