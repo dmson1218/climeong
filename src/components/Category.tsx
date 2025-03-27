@@ -4,8 +4,8 @@ const categories: ButtonProps[] = [
     { title: "최신 소식", link: "/news" },
     {
         title: "장비 정보",
-        subItems: ["암벽화", "하네스", "로프", "카라비너"],
-        subItemLinks: ["/shoes", "/harness", "/rope", "/carabiner"],
+        subItems: ["암벽화", "초크", "티셔츠"],
+        subItemLinks: ["/shoes", "/chalk", "/tshirt"],
     },
     { title: "커뮤니티", link: "/community" },
     { title: "크루 홍보", link: "/crew" },
