@@ -2,11 +2,11 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Posts } from "../api/community/route";
+import { Post } from "../api/community/route";
 import { BoardWrapper } from "@/components/MainBoard";
 
 export default function CommunityPage() {
-    const [postList, setPostList] = useState<Posts[]>([]);
+    const [postList, setPostList] = useState<Post[]>([]);
     const [postsToShow, setPostsToShow] = useState<number>(10);
 
     const updatePostsToShow = () => {

@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import { BoardWrapper } from "@/components/MainBoard";
 import { FormatContent } from "@/components/FormatContent";
 
-export default function PostPage() {
+export default function NewsPage() {
     const { id } = useParams();
     const [news, setNews] = useState<{ title: string; content: string } | null>(null);
 
