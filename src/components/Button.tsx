@@ -22,7 +22,7 @@ const Button: React.FC<ButtonProps> = ({ title, link, subItems, subItemLinks }) 
             </div>
             {hasSubItems && (
                 <div
-                    className={`absolute top-10 w-32 p-4 rounded-xl bg-slate-100
+                    className={`absolute top-10 w-full p-4 rounded-xl bg-slate-100
                         text-base flex flex-col gap-3 z-20
                         transition-all duration-300 ease-out
                         ${
