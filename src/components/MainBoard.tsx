@@ -95,7 +95,7 @@ const EventBoard = () => {
     return (
         <BoardWrapper>
             <div className="h-full flex-center">
-                <Image src="/images/theclimb.png" alt="event" width={300} height={200} />
+                <Image src="/images/MadRock_Drifter.jpg" alt="event" width={300} height={200} />
             </div>
         </BoardWrapper>
     );

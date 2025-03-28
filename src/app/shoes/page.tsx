@@ -1,14 +1,45 @@
-import Link from "next/link";
+import Image from "next/image";
 import { BoardWrapper } from "@/components/MainBoard";
+
+const shoeImages = [
+    "Butora_NewComet",
+    "Butora_Senegi",
+    "Butora_Spider",
+    "LaSportiva_Skwama",
+    "LaSportiva_SkwamaVegan",
+    "LaSportiva_SolutionComp",
+    "LaSportiva_Theory",
+    "MadRock_Drifter",
+    "MadRock_Drone",
+    "MadRock_DroneComp",
+    "MadRock_Rover",
+    "Scarpa_Drago",
+    "Scarpa_DragoLV",
+    "Scarpa_Veloce",
+    "Scarpa_VSR",
+    "Tenaya_Indalo",
+    "Tenaya_Oasi",
+    "Tenaya_OasiLV",
+    "Unparallel_Flagship",
+    "Unparallel_FlagshipPro",
+    "Unparallel_Qubit",
+];
 
 export default function ShoesPage() {
     return (
         <div className="min-h-[calc(100vh-5rem-60px)] mt-20 grid px-4">
             <BoardWrapper>
                 <div className="my-3 flex-center text-xl mb-4">암벽화 정보</div>
-                <div className="grow flex flex-col gap-1"></div>
-                <div className="flex justify-end">
-                    <Link href="/news/create">글쓰기</Link>
+                <div className="grow flex-center flex-wrap gap-1">
+                    {shoeImages.map((shoe) => (
+                        <Image
+                            key={shoe}
+                            src={`/images/${shoe}.jpg`}
+                            alt={shoe}
+                            width={300}
+                            height={200}
+                        />
+                    ))}
                 </div>
             </BoardWrapper>
         </div>
