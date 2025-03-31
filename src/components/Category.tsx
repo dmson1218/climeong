@@ -6,7 +6,7 @@ const categories: Category[] = [
     {
         title: "장비 정보",
         subItems: ["암벽화", "초크", "티셔츠"],
-        subItemLinks: ["/shoes", "/chalk", "/tshirt"],
+        subItemLinks: ["/shoe", "/chalk", "/tshirt"],
     },
     { title: "커뮤니티", link: "/community" },
     { title: "크루 홍보", link: "/crew" },

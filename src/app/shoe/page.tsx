@@ -1,7 +1,7 @@
-import Image from "next/image";
 import { BoardWrapper } from "@/components/MainBoard";
+import Shoe from "@/components/Shoe";
 
-const shoeImages = [
+const shoeNames = [
     "Butora_NewComet",
     "Butora_Senegi",
     "Butora_Spider",
@@ -25,21 +25,14 @@ const shoeImages = [
     "Unparallel_Qubit",
 ];
 
-export default function ShoesPage() {
+export default function ShoePage() {
     return (
         <div className="min-h-[calc(100vh-5rem-60px)] mt-20 grid px-4">
             <BoardWrapper>
                 <div className="my-3 flex-center text-xl mb-4">암벽화 정보</div>
                 <div className="grow mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3">
-                    {shoeImages.map((shoe) => (
-                        <Image
-                            key={shoe}
-                            src={`/images/${shoe}.jpg`}
-                            alt={shoe}
-                            width={300}
-                            height={300}
-                            className="hover:scale-110 transition-transform duration-200 ease-in-out rounded-lg m-1 sm:m-2"
-                        />
+                    {shoeNames.map((shoeName) => (
+                        <Shoe key={shoeName} shoeName={shoeName} />
                     ))}
                 </div>
             </BoardWrapper>
