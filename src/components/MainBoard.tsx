@@ -5,6 +5,16 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import type { Post } from "@/types/post";
 
+const ShoesBoard = () => {
+    return (
+        <BoardWrapper>
+            <div className="h-full flex-center">
+                <Image src="/images/MadRock_Drifter.jpg" alt="event" width={300} height={200} />
+            </div>
+        </BoardWrapper>
+    );
+};
+
 const NewsBoard: React.FC<{ count: number }> = ({ count }) => {
     const [newsList, setNewsList] = useState<Post[]>([]);
 
@@ -99,7 +109,7 @@ const MainBoard = () => {
     return (
         <div className="min-h-[calc(100vh-5rem-60px)] px-4 mt-20 grid sm:grid-rows-3 bg-white">
             <div className="sm:row-span-2 grid grid-cols-1">
-                <EventBoard />
+                <ShoesBoard />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3">
                 <NewsBoard count={4} />
@@ -118,14 +128,4 @@ const BoardWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => 
     );
 };
 
-const EventBoard = () => {
-    return (
-        <BoardWrapper>
-            <div className="h-full flex-center">
-                <Image src="/images/MadRock_Drifter.jpg" alt="event" width={300} height={200} />
-            </div>
-        </BoardWrapper>
-    );
-};
-
-export { MainBoard, BoardWrapper, NewsBoard };
+export { MainBoard, BoardWrapper };
