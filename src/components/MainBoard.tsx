@@ -5,11 +5,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import type { Post } from "@/types/post";
 
-interface NewsBoardProps {
-    count: number;
-}
-
-const NewsBoard: React.FC<NewsBoardProps> = ({ count }) => {
+const NewsBoard: React.FC<{ count: number }> = ({ count }) => {
     const [newsList, setNewsList] = useState<Post[]>([]);
 
     useEffect(() => {
@@ -39,17 +35,76 @@ const NewsBoard: React.FC<NewsBoardProps> = ({ count }) => {
     );
 };
 
+const CommunityBoard: React.FC<{ count: number }> = ({ count }) => {
+    const [newsList, setNewsList] = useState<Post[]>([]);
+
+    useEffect(() => {
+        fetch(`/api/community?count=${count}`)
+            .then((res) => res.json())
+            .then((data) => {
+                setNewsList(data);
+            });
+    }, [count]);
+
+    return (
+        <BoardWrapper>
+            <div className="sm:my-3 flex-center text-xl mb-3 sm:mb-4">커뮤니티</div>
+            <div className="flex flex-col gap-1">
+                {newsList.length > 0 &&
+                    newsList.map((news) => (
+                        <Link
+                            key={news._id}
+                            href={`/news/${news._id}`}
+                            className="mx-auto flex-center"
+                        >
+                            {news.title}
+                        </Link>
+                    ))}
+            </div>
+        </BoardWrapper>
+    );
+};
+
+const CrewBoard: React.FC<{ count: number }> = ({ count }) => {
+    const [newsList, setNewsList] = useState<Post[]>([]);
+
+    useEffect(() => {
+        fetch(`/api/crew?count=${count}`)
+            .then((res) => res.json())
+            .then((data) => {
+                setNewsList(data);
+            });
+    }, [count]);
+
+    return (
+        <BoardWrapper>
+            <div className="sm:my-3 flex-center text-xl mb-3 sm:mb-4">크루 홍보</div>
+            <div className="flex flex-col gap-1">
+                {newsList.length > 0 &&
+                    newsList.map((news) => (
+                        <Link
+                            key={news._id}
+                            href={`/news/${news._id}`}
+                            className="mx-auto flex-center"
+                        >
+                            {news.title}
+                        </Link>
+                    ))}
+            </div>
+        </BoardWrapper>
+    );
+};
+
 const MainBoard = () => {
     return (
         <div className="min-h-[calc(100vh-5rem-60px)] px-4 mt-20 grid sm:grid-rows-3 bg-white">
-            <div className="sm:row-span-2 grid grid-cols-1 sm:grid-cols-2">
+            <div className="sm:row-span-2 grid grid-cols-1">
                 <EventBoard />
-                <MonthlyBoard />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3">
-                <PopularBoard />
                 <NewsBoard count={4} />
-                <RankingBoard />
+                <CommunityBoard count={4} />
+                <CrewBoard count={4} />
             </div>
         </div>
     );
@@ -63,53 +118,11 @@ const BoardWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => 
     );
 };
 
-const PopularBoard = () => {
-    return (
-        <BoardWrapper>
-            <div className="sm:my-3 flex-center text-xl mb-3 sm:mb-4">인기 글</div>
-            <div className="flex flex-col gap-1">
-                <div className="flex-center">1. 첫 번째 글</div>
-                <div className="flex-center">2. 두 번째 글</div>
-                <div className="flex-center">3. 세 번째 글</div>
-                <div className="flex-center">4. 네 번째 글</div>
-            </div>
-        </BoardWrapper>
-    );
-};
-
-const RankingBoard = () => {
-    return (
-        <BoardWrapper>
-            <div className="sm:my-3 flex-center text-xl mb-3 sm:mb-4">검색어 랭킹</div>
-            <div className="flex flex-col gap-1">
-                <div className="flex-center">1. 첫 번째 글</div>
-                <div className="flex-center">2. 두 번째 글</div>
-                <div className="flex-center">3. 세 번째 글</div>
-                <div className="flex-center">4. 네 번째 글</div>
-            </div>
-        </BoardWrapper>
-    );
-};
-
 const EventBoard = () => {
     return (
         <BoardWrapper>
             <div className="h-full flex-center">
                 <Image src="/images/MadRock_Drifter.jpg" alt="event" width={300} height={200} />
-            </div>
-        </BoardWrapper>
-    );
-};
-
-const MonthlyBoard = () => {
-    return (
-        <BoardWrapper>
-            <div className="sm:my-3 flex-center text-xl mb-3 sm:mb-4">이달의 클라이머</div>
-            <div className="flex flex-col gap-1">
-                <div className="flex-center">1. 첫 번째 글</div>
-                <div className="flex-center">2. 두 번째 글</div>
-                <div className="flex-center">3. 세 번째 글</div>
-                <div className="flex-center">4. 네 번째 글</div>
             </div>
         </BoardWrapper>
     );
