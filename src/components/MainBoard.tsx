@@ -15,7 +15,7 @@ const ShoesBoard = () => {
     );
 };
 
-const NewsBoard: React.FC<{ count: number }> = ({ count }) => {
+const NewsBoard = ({ count }: { count: number }) => {
     const [newsList, setNewsList] = useState<Post[]>([]);
 
     useEffect(() => {
@@ -45,7 +45,7 @@ const NewsBoard: React.FC<{ count: number }> = ({ count }) => {
     );
 };
 
-const CommunityBoard: React.FC<{ count: number }> = ({ count }) => {
+const CommunityBoard = ({ count }: { count: number }) => {
     const [newsList, setNewsList] = useState<Post[]>([]);
 
     useEffect(() => {
@@ -75,7 +75,7 @@ const CommunityBoard: React.FC<{ count: number }> = ({ count }) => {
     );
 };
 
-const CrewBoard: React.FC<{ count: number }> = ({ count }) => {
+const CrewBoard = ({ count }: { count: number }) => {
     const [newsList, setNewsList] = useState<Post[]>([]);
 
     useEffect(() => {
