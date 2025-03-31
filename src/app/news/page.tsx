@@ -2,11 +2,11 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { News } from "../api/news/route";
 import { BoardWrapper } from "@/components/MainBoard";
+import type { Post } from "@/types/post";
 
 export default function NewsPage() {
-    const [newsList, setNewsList] = useState<News[]>([]);
+    const [newsList, setNewsList] = useState<Post[]>([]);
     const [postsToShow, setPostsToShow] = useState<number>(10);
 
     const updatePostsToShow = () => {

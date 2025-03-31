@@ -1,12 +1,5 @@
 import { getClient } from "@/database/dbClient";
 
-export interface News {
-    _id: string;
-    title: string;
-    content: string;
-    createdAt: Date;
-}
-
 export async function GET(request: Request) {
     const url = new URL(request.url);
     const count = Number(url.searchParams.get("count") || 10);

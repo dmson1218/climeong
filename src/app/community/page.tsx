@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Post } from "../api/community/route";
 import { BoardWrapper } from "@/components/MainBoard";
+import type { Post } from "@/types/post";
 
 export default function CommunityPage() {
     const [postList, setPostList] = useState<Post[]>([]);

@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { HeaderProps } from "./Header";
 import { useState } from "react";
+import type { MenuStateProps } from "./Header";
 
-const MenuButton: React.FC<HeaderProps> = ({ isOpen, setIsOpen }) => {
+const MenuButton: React.FC<MenuStateProps> = ({ isOpen, setIsOpen }) => {
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
     const handleClick = () => {

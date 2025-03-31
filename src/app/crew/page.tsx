@@ -2,11 +2,11 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Crew } from "../api/crew/route";
 import { BoardWrapper } from "@/components/MainBoard";
+import type { Post } from "@/types/post";
 
 export default function CrewPage() {
-    const [crewList, setCrewList] = useState<Crew[]>([]);
+    const [crewList, setCrewList] = useState<Post[]>([]);
     const [postsToShow, setPostsToShow] = useState<number>(10);
 
     const updatePostsToShow = () => {

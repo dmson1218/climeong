@@ -2,16 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ComponentPropsWithoutRef } from "react";
+import type { Category } from "@/types/category";
 
-interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
-    title: string;
-    link?: string;
-    subItems?: string[];
-    subItemLinks?: string[];
-}
-
-const Button: React.FC<ButtonProps> = ({ title, link, subItems, subItemLinks }) => {
+const Button: React.FC<Category> = ({ title, link, subItems, subItemLinks }) => {
     const [isHovered, setIsHovered] = useState(false);
     const hasSubItems = subItems && subItems.length > 0;
 
@@ -43,5 +36,4 @@ const Button: React.FC<ButtonProps> = ({ title, link, subItems, subItemLinks }) 
     );
 };
 
-export type { ButtonProps };
-export { Button };
+export default Button;

@@ -6,7 +6,7 @@ import { Category } from "@/components/Category";
 import MenuBar from "@/components/MenuBar";
 import MenuButton from "@/components/MenuButton";
 
-export interface HeaderProps {
+export interface MenuStateProps {
     isOpen: boolean;
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }

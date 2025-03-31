@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { HeaderProps } from "./Header";
 import { categories } from "./Category";
+import type { MenuStateProps } from "./Header";
 
-const MenuBar: React.FC<HeaderProps> = ({ isOpen, setIsOpen }) => {
+const MenuBar: React.FC<MenuStateProps> = ({ isOpen, setIsOpen }) => {
     const [activeCategory, setActiveCategory] = useState<string | null>(null);
     const [showMenu, setShowMenu] = useState(false);
     const [opacity, setOpacity] = useState(0);

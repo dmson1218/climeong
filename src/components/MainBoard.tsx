@@ -3,14 +3,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { News } from "../app/api/news/route";
+import type { Post } from "@/types/post";
 
 interface NewsBoardProps {
     count: number;
 }
 
 const NewsBoard: React.FC<NewsBoardProps> = ({ count }) => {
-    const [newsList, setNewsList] = useState<News[]>([]);
+    const [newsList, setNewsList] = useState<Post[]>([]);
 
     useEffect(() => {
         fetch(`/api/news?count=${count}`)
