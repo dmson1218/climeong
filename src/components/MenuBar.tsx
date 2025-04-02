@@ -42,36 +42,49 @@ const MenuBar: React.FC<MenuStateProps> = ({ isOpen, setIsOpen }) => {
                         className="hover:bg-gray-100 cursor-pointer relative"
                         onClick={() => toggleSubMenu(title)}
                     >
-                        <Link
-                            href={link || "#"}
-                            className="pl-10 p-5 block"
-                            onClick={() => {
-                                if (!subItems) {
-                                    setIsOpen(false);
-                                }
-                            }}
-                        >
-                            <div className="pt-1.5 text-lg">{title}</div>
-                        </Link>
-                        {subItems && subItemLinks && (
-                            <div
-                                className={`overflow-hidden flex flex-col transition-all duration-500 ease-in-out ${
-                                    activeCategory === title
-                                        ? "max-h-60 opacity-100 transform translate-y-0"
-                                        : "max-h-0 opacity-0 transform -translate-y-2"
-                                }`}
+                        {subItems && subItemLinks ? (
+                            <>
+                                <div
+                                    className="pl-10 p-5 block"
+                                    onClick={() => {
+                                        if (!subItems) {
+                                            setIsOpen(false);
+                                        }
+                                    }}
+                                >
+                                    <div className="pt-1.5 text-lg">{title}</div>
+                                </div>
+                                <div
+                                    className={`overflow-hidden flex flex-col transition-all duration-500 ease-in-out ${
+                                        activeCategory === title
+                                            ? "max-h-60 opacity-100 transform translate-y-0"
+                                            : "max-h-0 opacity-0 transform -translate-y-2"
+                                    }`}
+                                >
+                                    {subItems.map((subItem, index) => (
+                                        <Link
+                                            key={subItem}
+                                            href={subItemLinks[index] || "#"}
+                                            className="px-14 py-3 hover:bg-gray-200 cursor-pointer"
+                                            onClick={() => setIsOpen(false)}
+                                        >
+                                            <div className="pt-1">{subItem}</div>
+                                        </Link>
+                                    ))}
+                                </div>
+                            </>
+                        ) : (
+                            <Link
+                                href={link || "#"}
+                                className="pl-10 p-5 block"
+                                onClick={() => {
+                                    if (!subItems) {
+                                        setIsOpen(false);
+                                    }
+                                }}
                             >
-                                {subItems.map((subItem, index) => (
-                                    <Link
-                                        key={subItem}
-                                        href={subItemLinks[index] || "#"}
-                                        className="px-14 py-3 hover:bg-gray-200 cursor-pointer"
-                                        onClick={() => setIsOpen(false)}
-                                    >
-                                        <div className="pt-1">{subItem}</div>
-                                    </Link>
-                                ))}
-                            </div>
+                                <div className="pt-1.5 text-lg">{title}</div>
+                            </Link>
                         )}
                     </li>
                 ))}

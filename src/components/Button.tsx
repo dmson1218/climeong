@@ -11,7 +11,11 @@ const Button: React.FC<Category> = ({ title, link, subItems, subItemLinks }) => 
     return (
         <div className="relative" onMouseLeave={() => setIsHovered(false)}>
             <div className="m-1.5 text-lg" onMouseEnter={() => setIsHovered(true)}>
-                <Link href={link || "#"}>{title}</Link>
+                {hasSubItems ? (
+                    <div className="hover:cursor-pointer">{title}</div>
+                ) : (
+                    <Link href={link || "#"}>{title}</Link>
+                )}
             </div>
             {hasSubItems && (
                 <div
