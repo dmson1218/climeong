@@ -175,7 +175,7 @@ const CommunityBoard = ({ count }: { count: number }) => {
                     newsList.map((news) => (
                         <Link
                             key={news._id}
-                            href={`/news/${news._id}`}
+                            href={`/community/${news._id}`}
                             className="mx-auto flex-center"
                         >
                             {news.title}
@@ -205,7 +205,7 @@ const CrewBoard = ({ count }: { count: number }) => {
                     newsList.map((news) => (
                         <Link
                             key={news._id}
-                            href={`/news/${news._id}`}
+                            href={`/crew/${news._id}`}
                             className="mx-auto flex-center"
                         >
                             {news.title}
