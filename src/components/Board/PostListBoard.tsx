@@ -48,7 +48,7 @@ const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
                     {postList.slice(0, postsToShow).map((post) => (
                         <Link
                             key={post._id}
-                            href={`/community/${post._id}`}
+                            href={`/${boardType}/${post._id}`}
                             className="w-full md:w-3/4 lg:w-3/5 mx-auto flex justify-between p-3 rounded hover:bg-slate-100"
                         >
                             <div>{post.title}</div>

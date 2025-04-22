@@ -38,9 +38,10 @@ const Board = ({ boardType, boardTitle, count }: BoardProps) => {
                 {postList.map((post) => (
                     <PostLink
                         key={post._id}
-                        isLoading={isLoading}
+                        boardType={boardType}
                         _id={post._id}
                         title={post.title}
+                        isLoading={isLoading}
                     />
                 ))}
             </div>
