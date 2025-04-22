@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { BoardWrapper } from "@/components/MainBoard";
+import BoardWrapper from "@/components/Board/BoardWrapper";
 import { FormatContent } from "@/components/FormatContent";
 
 export default function CrewPage() {

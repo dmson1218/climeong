@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { BoardWrapper } from "@/components/MainBoard";
+import BoardWrapper from "@/components/Board/BoardWrapper";
 import type { Post } from "@/types/post";
 
 export default function NewsPage() {

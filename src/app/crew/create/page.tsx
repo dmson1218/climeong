@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { BoardWrapper } from "@/components/MainBoard";
+import BoardWrapper from "@/components/Board/BoardWrapper";
 
 export default function CrewCreatePage() {
     const [title, setTitle] = useState<string>("");

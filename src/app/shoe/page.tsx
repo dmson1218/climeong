@@ -1,4 +1,4 @@
-import { BoardWrapper } from "@/components/MainBoard";
+import BoardWrapper from "@/components/Board/BoardWrapper";
 import Shoe from "@/components/Shoe";
 
 const shoeNames = [
