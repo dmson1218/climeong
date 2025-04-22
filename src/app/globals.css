@@ -17,3 +17,7 @@
 ::-webkit-scrollbar {
     display: none;
 }
+
+.skeleton {
+    @apply animate-pulse bg-slate-100 rounded;
+}
