@@ -57,7 +57,7 @@ const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
                     ))}
                 </div>
                 <div className="w-full md:w-3/4 lg:w-3/5 mx-auto p-3 flex justify-end">
-                    <Link href="/community/create">글쓰기</Link>
+                    <Link href={`/${boardType}/create`}>글쓰기</Link>
                 </div>
             </BoardWrapper>
         </div>
