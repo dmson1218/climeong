@@ -24,6 +24,7 @@ const MenuButton: React.FC<MenuStateProps> = ({ isOpen, setIsOpen }) => {
                 alt="menu"
                 width={22}
                 height={22}
+                priority
                 className="pb-2 mr-6 cursor-pointer"
                 onClick={handleClick}
             />
