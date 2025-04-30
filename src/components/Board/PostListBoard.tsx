@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import BoardWrapper from "@/components/Board/BoardWrapper";
+import PostLinkWithDate from "../Link.tsx/PostLinkWithDate";
 import type { Post } from "@/types/post";
-import renderSkeleton from "@/util/renderSkeleton";
 
 interface PostListBoardProps {
     boardType: string;
@@ -54,20 +54,17 @@ const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
         <div className="min-h-[calc(100vh-5rem-60px)] mt-20 grid px-4">
             <BoardWrapper>
                 <div className="my-3 flex-center text-xl mb-4">{boardTitle}</div>
-                <div className="grow flex flex-col items-center gap-1">
-                    {postList.slice(0, postsToShow).map((post) =>
-                        renderSkeleton(
-                            isLoading,
-                            <Link
-                                key={post._id}
-                                href={`/${boardType}/${post._id}`}
-                                className="w-full md:w-3/4 lg:w-3/5 mx-auto flex justify-between p-3 rounded hover:bg-slate-100"
-                            >
-                                <div>{post.title}</div>
-                                <div>{new Date(post.createdAt).toLocaleDateString()}</div>
-                            </Link>
-                        )
-                    )}
+                <div className="grow flex flex-col items-center gap-4">
+                    {postList.slice(0, postsToShow).map((post) => (
+                        <PostLinkWithDate
+                            key={post._id}
+                            boardType={boardType}
+                            _id={post._id}
+                            title={post.title}
+                            createdAt={post.createdAt}
+                            isLoading={isLoading}
+                        />
+                    ))}
                 </div>
                 <div className="w-full md:w-3/4 lg:w-3/5 mx-auto p-3 flex justify-end">
                     <Link href={`/${boardType}/create`}>글쓰기</Link>
