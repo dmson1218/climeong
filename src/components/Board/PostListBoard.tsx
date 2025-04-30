@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import BoardWrapper from "@/components/Board/BoardWrapper";
 import type { Post } from "@/types/post";
+import renderSkeleton from "@/util/renderSkeleton";
 
 interface PostListBoardProps {
     boardType: string;
@@ -11,7 +12,15 @@ interface PostListBoardProps {
 }
 
 const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
-    const [postList, setPostList] = useState<Post[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [postList, setPostList] = useState<Post[]>(
+        Array.from({ length: 10 }).map((_, idx) => ({
+            _id: `dummy-${idx}`,
+            title: "",
+            content: "",
+            createdAt: new Date(),
+        }))
+    );
     const [postsToShow, setPostsToShow] = useState<number>(10);
 
     const updatePostsToShow = () => {
@@ -29,6 +38,7 @@ const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
         fetch(`/api/${boardType}?count=10`)
             .then((res) => res.json())
             .then((data) => {
+                setIsLoading(false);
                 setPostList(data);
             });
 
@@ -45,16 +55,19 @@ const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
             <BoardWrapper>
                 <div className="my-3 flex-center text-xl mb-4">{boardTitle}</div>
                 <div className="grow flex flex-col items-center gap-1">
-                    {postList.slice(0, postsToShow).map((post) => (
-                        <Link
-                            key={post._id}
-                            href={`/${boardType}/${post._id}`}
-                            className="w-full md:w-3/4 lg:w-3/5 mx-auto flex justify-between p-3 rounded hover:bg-slate-100"
-                        >
-                            <div>{post.title}</div>
-                            <div>{new Date(post.createdAt).toLocaleDateString()}</div>
-                        </Link>
-                    ))}
+                    {postList.slice(0, postsToShow).map((post) =>
+                        renderSkeleton(
+                            isLoading,
+                            <Link
+                                key={post._id}
+                                href={`/${boardType}/${post._id}`}
+                                className="w-full md:w-3/4 lg:w-3/5 mx-auto flex justify-between p-3 rounded hover:bg-slate-100"
+                            >
+                                <div>{post.title}</div>
+                                <div>{new Date(post.createdAt).toLocaleDateString()}</div>
+                            </Link>
+                        )
+                    )}
                 </div>
                 <div className="w-full md:w-3/4 lg:w-3/5 mx-auto p-3 flex justify-end">
                     <Link href={`/${boardType}/create`}>글쓰기</Link>

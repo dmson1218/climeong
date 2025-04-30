@@ -1,5 +1,5 @@
 import Link from "next/link";
-import renderSkeleton from "@/util/renderSkeleton";
+import useSkeleton from "@/hooks/useSkeleton";
 
 interface PostLinkProps {
     boardType: string;
@@ -9,9 +9,9 @@ interface PostLinkProps {
 }
 
 const PostLink = ({ boardType, _id, title, isLoading }: PostLinkProps) => {
-    return renderSkeleton(
+    return useSkeleton(
         isLoading,
-        <Link key={_id} href={`/${boardType}/${_id}`} className="w-full h-6 mx-auto flex-center">
+        <Link href={`/${boardType}/${_id}`} className="w-full h-6 mx-auto flex-center">
             {title}
         </Link>
     );
