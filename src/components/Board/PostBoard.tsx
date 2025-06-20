@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import BoardWrapper from "@/components/Board/BoardWrapper";
 import { FormatContent } from "@/components/FormatContent";
+import useSkeleton from "@/hooks/useSkeleton";
 
 interface PostBoardProps {
     boardType: string;
@@ -11,7 +12,11 @@ interface PostBoardProps {
 
 const PostBoard = ({ boardType }: PostBoardProps) => {
     const { id } = useParams();
-    const [post, setPost] = useState<{ title: string; content: string } | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [post, setPost] = useState<{ title: string; content: string }>({
+        title: "",
+        content: "",
+    });
 
     useEffect(() => {
         async function fetchPost() {
@@ -19,6 +24,7 @@ const PostBoard = ({ boardType }: PostBoardProps) => {
                 const res = await fetch(`/api/${boardType}/${id}`);
                 if (!res.ok) throw new Error("정보를 가져오는 중 오류가 발생했습니다.");
                 const data = await res.json();
+                setIsLoading(false);
                 setPost(data);
             } catch (error) {
                 console.error(error);
@@ -30,15 +36,19 @@ const PostBoard = ({ boardType }: PostBoardProps) => {
     }, [boardType, id]);
 
     return (
-        <div className="min-h-[calc(100vh-5rem-60px)] mt-20 grid px-4">
+        <div className="min-h-[calc(100vh-5rem-60px)] mt-20 flex px-4">
             <BoardWrapper>
-                {post && (
-                    <>
-                        <div className="my-3 flex-center text-xl mb-4">{post.title}</div>
-                        <div className="w-full md:w-3/4 lg:w-3/5 p-3 mx-auto">
-                            <FormatContent content={post.content} />
-                        </div>
-                    </>
+                {useSkeleton(
+                    isLoading,
+                    <div className="w-80 h-12 mx-auto my-3 flex-center text-xl mb-4">
+                        {post.title}
+                    </div>
+                )}
+                {useSkeleton(
+                    isLoading,
+                    <div className="w-full md:w-3/4 lg:w-3/5 grow p-3 mx-auto">
+                        <FormatContent content={post.content} />
+                    </div>
                 )}
             </BoardWrapper>
         </div>
