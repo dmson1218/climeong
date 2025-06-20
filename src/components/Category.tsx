@@ -1,5 +1,5 @@
-import Button from "./Button";
 import type { Category } from "@/types/category";
+import Button from "./Button";
 
 const categories: Category[] = [
     { title: "최신 소식", link: "/news" },

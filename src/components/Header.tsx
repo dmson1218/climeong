@@ -1,10 +1,10 @@
 "use client";
 
-import Link from "next/link";
-import { useState } from "react";
 import { Category } from "@/components/Category";
 import MenuBar from "@/components/MenuBar";
 import MenuButton from "@/components/MenuButton";
+import Link from "next/link";
+import { useState } from "react";
 
 export interface MenuStateProps {
     isOpen: boolean;

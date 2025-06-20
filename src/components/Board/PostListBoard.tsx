@@ -1,10 +1,10 @@
 "use client";
 
+import BoardWrapper from "@/components/Board/BoardWrapper";
+import type { Post } from "@/types/post";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import BoardWrapper from "@/components/Board/BoardWrapper";
 import PostLinkWithDate from "../Link.tsx/PostLinkWithDate";
-import type { Post } from "@/types/post";
 
 interface PostListBoardProps {
     boardType: string;

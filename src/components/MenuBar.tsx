@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { categories } from "./Category";
 import type { MenuStateProps } from "./Header";
 

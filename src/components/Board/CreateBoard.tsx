@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import BoardWrapper from "@/components/Board/BoardWrapper";
+import { useState } from "react";
 
 interface CreateBoardProps {
     boardType: string;

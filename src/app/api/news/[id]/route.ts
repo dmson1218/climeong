@@ -1,5 +1,5 @@
-import { ObjectId } from "mongodb";
 import { getClient } from "@/database/dbClient";
+import { ObjectId } from "mongodb";
 
 export async function GET(request: Request) {
     const id = request.url.split("/").pop();

@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
 import type { Category } from "@/types/category";
+import Link from "next/link";
+import { useState } from "react";
 
 const Button: React.FC<Category> = ({ title, link, subItems, subItemLinks }) => {
     const [isHovered, setIsHovered] = useState(false);

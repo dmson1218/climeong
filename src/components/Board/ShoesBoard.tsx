@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import BoardWrapper from "@/components/Board/BoardWrapper";
 import Shoe from "@/components/Shoe";
+import { useEffect, useRef } from "react";
 
 const shoeNames = [
     "Butora_NewComet",

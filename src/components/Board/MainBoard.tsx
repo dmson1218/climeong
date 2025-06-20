@@ -1,5 +1,5 @@
-import ShoesBoard from "@/components/Board/ShoesBoard";
 import Board from "@/components/Board/Board";
+import ShoesBoard from "@/components/Board/ShoesBoard";
 
 const MainBoard = () => {
     return (

@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
 import BoardWrapper from "@/components/Board/BoardWrapper";
 import { FormatContent } from "@/components/FormatContent";
 import useSkeleton from "@/hooks/useSkeleton";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 interface PostBoardProps {
     boardType: string;

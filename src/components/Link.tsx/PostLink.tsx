@@ -1,5 +1,5 @@
-import Link from "next/link";
 import useSkeleton from "@/hooks/useSkeleton";
+import Link from "next/link";
 
 interface PostLinkProps {
     boardType: string;
