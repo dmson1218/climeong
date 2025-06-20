@@ -16,7 +16,7 @@ const Header = () => {
 
   return (
     <>
-      <div className="fixed left-0 top-0 z-10 flex h-20 w-full justify-between bg-white pt-3">
+      <div className="fixed left-0 top-0 z-10 flex h-20 w-full justify-between border-b border-gray-200 bg-white pt-3 lg:px-6">
         <div className="flex-center ml-4 w-32">
           <Link href="/" className="cursor-pointer text-2xl">
             클라이멍
