@@ -56,9 +56,7 @@ const MenuBar: React.FC<MenuStateProps> = ({ isOpen, setIsOpen }) => {
                                 </div>
                                 <div
                                     className={`overflow-hidden flex flex-col transition-all duration-500 ease-in-out ${
-                                        activeCategory === title
-                                            ? "max-h-60 opacity-100 transform translate-y-0"
-                                            : "max-h-0 opacity-0 transform -translate-y-2"
+                                        activeCategory === title ? "max-h-60" : "max-h-0"
                                     }`}
                                 >
                                     {subItems.map((subItem, index) => (
