@@ -3,21 +3,21 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: "reko";
-    src: url("/fonts/reko.ttf");
+  font-family: "reko";
+  src: url("/fonts/reko.ttf");
 }
 
 :root {
 }
 
 .flex-center {
-    @apply flex items-center justify-center;
+  @apply flex items-center justify-center;
 }
 
 ::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 .skeleton {
-    @apply animate-pulse bg-slate-100 rounded;
+  @apply animate-pulse rounded bg-slate-100;
 }

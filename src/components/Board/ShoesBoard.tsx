@@ -5,59 +5,62 @@ import Shoe from "@/components/Shoe";
 import { useEffect, useRef } from "react";
 
 const shoeNames = [
-    "Butora_NewComet",
-    "Butora_Senegi",
-    "Butora_Spider",
-    "LaSportiva_Skwama",
-    "LaSportiva_SkwamaVegan",
-    "LaSportiva_SolutionComp",
-    "LaSportiva_Theory",
-    "MadRock_Drifter",
-    "MadRock_Drone",
-    "MadRock_DroneComp",
-    "MadRock_Rover",
-    "Scarpa_Drago",
-    "Scarpa_DragoLV",
-    "Scarpa_Veloce",
-    "Scarpa_VSR",
-    "Tenaya_Indalo",
-    "Tenaya_Oasi",
-    "Tenaya_OasiLV",
-    "Unparallel_Flagship",
-    "Unparallel_FlagshipPro",
-    "Unparallel_Qubit",
+  "Butora_NewComet",
+  "Butora_Senegi",
+  "Butora_Spider",
+  "LaSportiva_Skwama",
+  "LaSportiva_SkwamaVegan",
+  "LaSportiva_SolutionComp",
+  "LaSportiva_Theory",
+  "MadRock_Drifter",
+  "MadRock_Drone",
+  "MadRock_DroneComp",
+  "MadRock_Rover",
+  "Scarpa_Drago",
+  "Scarpa_DragoLV",
+  "Scarpa_Veloce",
+  "Scarpa_VSR",
+  "Tenaya_Indalo",
+  "Tenaya_Oasi",
+  "Tenaya_OasiLV",
+  "Unparallel_Flagship",
+  "Unparallel_FlagshipPro",
+  "Unparallel_Qubit",
 ];
 
 const ShoesBoard = () => {
-    const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-        const scrollContainer = containerRef.current;
-        if (!scrollContainer) return;
+  useEffect(() => {
+    const scrollContainer = containerRef.current;
+    if (!scrollContainer) return;
 
-        const interval = setInterval(() => {
-            if (
-                scrollContainer.scrollLeft + scrollContainer.offsetWidth >=
-                scrollContainer.scrollWidth
-            ) {
-                scrollContainer.scrollLeft = 0;
-            } else {
-                scrollContainer.scrollLeft += 1;
-            }
-        }, 30);
+    const interval = setInterval(() => {
+      if (
+        scrollContainer.scrollLeft + scrollContainer.offsetWidth >=
+        scrollContainer.scrollWidth
+      ) {
+        scrollContainer.scrollLeft = 0;
+      } else {
+        scrollContainer.scrollLeft += 1;
+      }
+    }, 30);
 
-        return () => clearInterval(interval);
-    }, []);
+    return () => clearInterval(interval);
+  }, []);
 
-    return (
-        <BoardWrapper>
-            <div ref={containerRef} className="my-auto flex overflow-x-auto whitespace-nowrap">
-                {shoeNames.map((shoeName) => (
-                    <Shoe key={shoeName} shoeName={shoeName} />
-                ))}
-            </div>
-        </BoardWrapper>
-    );
+  return (
+    <BoardWrapper>
+      <div
+        ref={containerRef}
+        className="my-auto flex overflow-x-auto whitespace-nowrap"
+      >
+        {shoeNames.map((shoeName) => (
+          <Shoe key={shoeName} shoeName={shoeName} />
+        ))}
+      </div>
+    </BoardWrapper>
+  );
 };
 
 //     const ShoesBoard = () => {

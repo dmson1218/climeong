@@ -4,22 +4,22 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-    title: "My Next.js App",
-    description: "My Next.js App Description",
+  title: "My Next.js App",
+  description: "My Next.js App Description",
 };
 
 export default function RootLayout({
-    children,
+  children,
 }: Readonly<{
-    children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
-    return (
-        <html lang="ko">
-            <body className="relative flex flex-col font-reko">
-                <Header />
-                {children}
-                <Footer />
-            </body>
-        </html>
-    );
+  return (
+    <html lang="ko">
+      <body className="relative flex flex-col font-reko">
+        <Header />
+        {children}
+        <Footer />
+      </body>
+    </html>
+  );
 }

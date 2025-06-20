@@ -7,27 +7,27 @@ import Link from "next/link";
 import { useState } from "react";
 
 export interface MenuStateProps {
-    isOpen: boolean;
-    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Header = () => {
-    const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-    return (
-        <>
-            <div className="w-full h-20 pt-3 fixed top-0 left-0 flex justify-between bg-white z-10">
-                <div className="w-32 ml-4 flex-center">
-                    <Link href="/" className="text-2xl cursor-pointer">
-                        클라이멍
-                    </Link>
-                </div>
-                <Category />
-                <MenuButton isOpen={isOpen} setIsOpen={setIsOpen} />
-            </div>
-            <MenuBar isOpen={isOpen} setIsOpen={setIsOpen} />
-        </>
-    );
+  return (
+    <>
+      <div className="fixed left-0 top-0 z-10 flex h-20 w-full justify-between bg-white pt-3">
+        <div className="flex-center ml-4 w-32">
+          <Link href="/" className="cursor-pointer text-2xl">
+            클라이멍
+          </Link>
+        </div>
+        <Category />
+        <MenuButton isOpen={isOpen} setIsOpen={setIsOpen} />
+      </div>
+      <MenuBar isOpen={isOpen} setIsOpen={setIsOpen} />
+    </>
+  );
 };
 
 export default Header;

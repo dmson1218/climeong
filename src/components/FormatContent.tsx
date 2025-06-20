@@ -1,18 +1,18 @@
 interface FormatContentProps {
-    content: string;
+  content: string;
 }
 
 const FormatContent: React.FC<FormatContentProps> = ({ content }) => {
-    const formattedContent = content.split("\n").map((line, index) => {
-        return (
-            <span key={index}>
-                {line}
-                <br />
-            </span>
-        );
-    });
+  const formattedContent = content.split("\n").map((line, index) => {
+    return (
+      <span key={index}>
+        {line}
+        <br />
+      </span>
+    );
+  });
 
-    return <>{formattedContent}</>;
+  return <>{formattedContent}</>;
 };
 
 export { FormatContent };
