@@ -13,7 +13,7 @@ export default {
         foreground: "var(--foreground)",
       },
       fontFamily: {
-        reko: ["reko"],
+        pretendard: ["Pretendard Variable"],
       },
     },
   },

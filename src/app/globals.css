@@ -3,8 +3,11 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "reko";
-  src: url("/fonts/reko.ttf");
+  font-family: "Pretendard Variable";
+  font-weight: 45 920;
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/PretendardVariable.woff2") format("woff2-variations");
 }
 
 :root {
