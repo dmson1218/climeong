@@ -41,7 +41,7 @@ const CreateBoard = ({ boardType, boardTitle }: CreateBoardProps) => {
   };
 
   return (
-    <div className="mt-20 flex min-h-[calc(100vh-5rem-60px)] px-4 lg:px-10">
+    <div className="mt-24 flex min-h-[calc(100vh-6rem-60px)] px-4 lg:px-10">
       <BoardWrapper>
         <div className="flex-center my-3 text-xl">{boardTitle}</div>
         <div className="flex grow flex-col items-center gap-3 px-5">

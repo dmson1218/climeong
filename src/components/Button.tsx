@@ -24,7 +24,7 @@ const Button: React.FC<Category> = ({
       </div>
       {hasSubItems && (
         <div
-          className={`absolute top-10 z-20 flex w-full flex-col gap-3 rounded-xl bg-slate-100 p-4 text-base transition-all duration-300 ease-out ${
+          className={`absolute top-10 z-20 flex w-full flex-col gap-3 rounded-xl border bg-white p-4 text-base transition-all duration-300 ease-out ${
             isHovered
               ? "pointer-events-auto translate-y-0 opacity-100"
               : "pointer-events-none -translate-y-5 opacity-0"
