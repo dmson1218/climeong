@@ -14,7 +14,7 @@ export async function GET(request: Request) {
     const collection = db.collection(collectionName);
 
     const postList = await collection
-      .find({}, { projection: { title: 1, createdAt: 1 } })
+      .find({}, { projection: { title: 1, content: 1, createdAt: 1 } })
       .sort({ createdAt: -1 })
       .limit(count)
       .toArray();

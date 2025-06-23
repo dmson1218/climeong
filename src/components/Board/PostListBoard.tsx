@@ -14,11 +14,11 @@ interface PostListBoardProps {
 const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [postList, setPostList] = useState<Post[]>(
-    Array.from({ length: 10 }).map((_, idx) => ({
+    Array.from({ length: 5 }).map((_, idx) => ({
       _id: `dummy-${idx}`,
       title: "",
       content: "",
-      createdAt: new Date(),
+      createdAt: new Date().toISOString(),
     })),
   );
   const [postsToShow, setPostsToShow] = useState<number>(10);
@@ -61,6 +61,7 @@ const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
               boardType={boardType}
               _id={post._id}
               title={post.title}
+              content={post.content}
               createdAt={post.createdAt}
               isLoading={isLoading}
             />

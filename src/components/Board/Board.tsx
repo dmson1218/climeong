@@ -18,7 +18,7 @@ const Board = ({ boardType, boardTitle, count }: BoardProps) => {
       _id: `dummy-${idx}`,
       title: "",
       content: "",
-      createdAt: new Date(),
+      createdAt: new Date().toISOString(),
     })),
   );
 
