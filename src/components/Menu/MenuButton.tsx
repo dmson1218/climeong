@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import type { MenuStateProps } from "./Header";
+import type { MenuStateProps } from "../Header";
 
 const MenuButton: React.FC<MenuStateProps> = ({ isOpen, setIsOpen }) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
@@ -14,11 +14,11 @@ const MenuButton: React.FC<MenuStateProps> = ({ isOpen, setIsOpen }) => {
     setIsButtonDisabled(true);
     setTimeout(() => {
       setIsButtonDisabled(false);
-    }, 580);
+    }, 500);
   };
 
   return (
-    <div className="mx-2 flex w-32 items-center justify-end lg:invisible">
+    <div className="mr-1 mt-2 flex w-32 items-center justify-end lg:invisible">
       <Image
         src={isOpen ? "/icons/close.png" : "/icons/menu.png"}
         alt="menu"
