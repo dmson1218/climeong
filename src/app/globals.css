@@ -10,6 +10,11 @@
   src: url("/fonts/PretendardVariable.woff2") format("woff2-variations");
 }
 
+@font-face {
+  font-family: "reko";
+  src: url("/fonts/reko.ttf");
+}
+
 :root {
 }
 

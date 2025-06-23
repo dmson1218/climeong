@@ -14,6 +14,7 @@ export default {
       },
       fontFamily: {
         pretendard: ["Pretendard Variable"],
+        reko: ["reko"],
       },
     },
   },
