@@ -51,7 +51,7 @@ const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
   }, [boardType]);
 
   return (
-    <div className="mt-24 grid min-h-[calc(100vh-6rem-60px)] px-4 lg:px-10">
+    <div className="layout mt-24 grid min-h-[calc(100vh-6rem-60px)]">
       <BoardWrapper>
         <div className="flex-center my-3 mb-4 h-12 text-xl">{boardTitle}</div>
         <div className="flex grow flex-col items-center gap-4">

@@ -36,7 +36,7 @@ const PostBoard = ({ boardType }: PostBoardProps) => {
   }, [boardType, id]);
 
   return (
-    <div className="mt-24 flex min-h-[calc(100vh-6rem-60px)] px-4 lg:px-10">
+    <div className="layout mt-24 flex min-h-[calc(100vh-6rem-60px)]">
       <BoardWrapper>
         {useSkeleton(
           isLoading,

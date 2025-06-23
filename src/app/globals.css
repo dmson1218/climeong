@@ -29,3 +29,7 @@
 .skeleton {
   @apply animate-pulse rounded bg-slate-100;
 }
+
+.layout {
+  @apply mx-auto w-full max-w-7xl px-4;
+}

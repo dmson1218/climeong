@@ -3,7 +3,7 @@ import ShoesBoard from "@/components/Board/ShoesBoard";
 
 const MainBoard = () => {
   return (
-    <div className="mx-auto mt-24 grid min-h-[calc(100vh-6rem-60px)] bg-white px-4 sm:grid-rows-3 lg:w-5/6">
+    <div className="layout mt-24 grid min-h-[calc(100vh-6rem-60px)] bg-white sm:grid-rows-3">
       <div className="grid grid-cols-1 sm:row-span-2">
         <ShoesBoard />
       </div>

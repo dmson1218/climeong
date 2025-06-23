@@ -33,19 +33,19 @@ const Board = ({ boardType, boardTitle, count }: BoardProps) => {
 
   return (
     <BoardWrapper>
-      <div className="flex-center mb-3 text-xl sm:my-3 sm:mb-4">
-        {boardTitle}
-      </div>
-      <div className="flex flex-col gap-1">
-        {postList.map((post) => (
-          <PostLink
-            key={post._id}
-            boardType={boardType}
-            _id={post._id}
-            title={post.title}
-            isLoading={isLoading}
-          />
-        ))}
+      <div className="flex-center my-auto flex-col gap-4">
+        <div className="flex-center text-xl">{boardTitle}</div>
+        <div className="flex flex-col gap-1">
+          {postList.map((post) => (
+            <PostLink
+              key={post._id}
+              boardType={boardType}
+              _id={post._id}
+              title={post.title}
+              isLoading={isLoading}
+            />
+          ))}
+        </div>
       </div>
     </BoardWrapper>
   );

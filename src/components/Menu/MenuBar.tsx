@@ -12,7 +12,7 @@ const MenuBar: React.FC<MenuStateProps> = ({ isOpen, setIsOpen }) => {
   useEffect(() => {
     if (isOpen) {
       setShowMenu(true);
-      setTimeout(() => setOpacity(1), 80);
+      setTimeout(() => setOpacity(1), 50);
     } else {
       setTimeout(() => setOpacity(0), 50);
       setTimeout(() => setShowMenu(false), 500);
