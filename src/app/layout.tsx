@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className="2xl font-pretendard relative flex flex-col font-bold">
+      <body className="relative flex flex-col font-pretendard font-bold">
         <Header />
         {children}
         <Footer />

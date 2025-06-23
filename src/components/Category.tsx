@@ -14,7 +14,7 @@ const categories: Category[] = [
 
 const Category: React.FC = () => {
   return (
-    <div className="hidden items-center justify-center gap-10 text-lg lg:flex">
+    <div className="hidden items-center justify-center gap-8 text-lg lg:flex">
       {categories.map((category: Category) => (
         <Button key={category.title} {...category} />
       ))}

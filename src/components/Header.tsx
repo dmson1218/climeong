@@ -1,8 +1,8 @@
 "use client";
 
 import { Category } from "@/components/Category";
-import MenuBar from "@/components/MenuBar";
-import MenuButton from "@/components/MenuButton";
+import MenuBar from "@/components/Menu/MenuBar";
+import MenuButton from "@/components/Menu/MenuButton";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -16,14 +16,19 @@ const Header = () => {
 
   return (
     <>
-      <div className="fixed left-0 top-0 z-10 flex h-20 w-full justify-between border-b border-gray-200 bg-white pt-3 lg:px-6">
-        <div className="flex-center ml-4 w-32">
-          <Link href="/" className="cursor-pointer text-2xl">
-            클라이멍
-          </Link>
+      <div className="fixed left-0 top-0 z-10 h-20 w-full border-b border-gray-200 bg-white">
+        <div className="mx-auto mt-5 flex w-full justify-between lg:w-5/6">
+          <div className="flex-center w-32 pl-4">
+            <Link
+              href="/"
+              className="cursor-pointer pt-1 font-reko text-2xl font-medium"
+            >
+              클라이멍
+            </Link>
+          </div>
+          <Category />
+          <MenuButton isOpen={isOpen} setIsOpen={setIsOpen} />
         </div>
-        <Category />
-        <MenuButton isOpen={isOpen} setIsOpen={setIsOpen} />
       </div>
       <MenuBar isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
