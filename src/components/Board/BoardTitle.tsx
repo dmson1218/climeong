@@ -28,7 +28,7 @@ const BoardTitle = ({ boardType, title, subTitle = "" }: BoardTitleProps) => {
       <div className="flex">
         <Link
           href={`/${boardType || ""}`}
-          className="hidden text-blue-500 hover:opacity-50 md:block"
+          className="hidden text-blue-600 hover:opacity-50 md:block"
         >
           더보기
         </Link>
