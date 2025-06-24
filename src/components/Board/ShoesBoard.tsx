@@ -3,7 +3,7 @@
 import BoardWrapper from "@/components/Board/BoardWrapper";
 import Shoe from "@/components/Shoe";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const shoeNames = [
   "Butora_NewComet",
@@ -29,68 +29,98 @@ const shoeNames = [
   "Unparallel_Qubit",
 ];
 
-const useResponsiveVisibleCount = () => {
-  const [count, setCount] = useState(4);
+const CARD_WIDTH = 192;
+const GAP = 8;
+const CARD_TOTAL_WIDTH = CARD_WIDTH + GAP;
+
+const ShoesBoard = () => {
+  const [startIndex, setStartIndex] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(1);
+  const [containerWidth, setContainerWidth] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const updateCount = () => {
-      const width = window.innerWidth;
-      if (width < 768) {
-        setCount(2);
-      } else if (width < 1024) {
-        setCount(3);
-      } else {
-        setCount(4);
+    const updateLayout = () => {
+      if (containerRef.current) {
+        const width = containerRef.current.clientWidth;
+        setContainerWidth(width);
+
+        const count = Math.floor(width / CARD_TOTAL_WIDTH);
+        setVisibleCount(Math.max(1, count));
+
+        setIsMobile(window.innerWidth < 768);
       }
     };
 
-    updateCount();
-    window.addEventListener("resize", updateCount);
-    return () => window.removeEventListener("resize", updateCount);
+    updateLayout();
+    window.addEventListener("resize", updateLayout);
+    return () => window.removeEventListener("resize", updateLayout);
   }, []);
 
-  return count;
-};
-const ShoesBoard = () => {
-  const [startIndex, setStartIndex] = useState(0);
-  const visibleCount = useResponsiveVisibleCount();
+  useEffect(() => {
+    setStartIndex(0);
+
+    if (containerRef.current) {
+      containerRef.current.scrollTo({ left: 0, behavior: "smooth" });
+    }
+  }, [isMobile]);
+
+  const maxIndex = shoeNames.length - visibleCount;
+  const totalContentWidth = shoeNames.length * CARD_TOTAL_WIDTH - GAP;
+
+  let offset = startIndex * CARD_TOTAL_WIDTH;
+  const maxOffset = totalContentWidth - containerWidth;
+  if (offset > maxOffset) {
+    offset = maxOffset > 0 ? maxOffset : 0;
+  }
 
   const handlePrev = () => {
-    setStartIndex((prev) => Math.max(prev - 1, 0));
+    setStartIndex((prev) => Math.max(prev - visibleCount, 0));
   };
 
   const handleNext = () => {
-    setStartIndex((prev) =>
-      Math.min(prev + 1, shoeNames.length - visibleCount),
-    );
+    setStartIndex((prev) => Math.min(prev + visibleCount, maxIndex));
   };
-
-  const visibleShoes = shoeNames.slice(startIndex, startIndex + visibleCount);
 
   return (
     <BoardWrapper>
-      <div className="relative">
+      <div className="relative w-full">
         <button
+          aria-label="Prev"
           onClick={handlePrev}
-          className="absolute left-0 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 rounded-full border bg-white p-2 shadow-xl"
           disabled={startIndex === 0}
+          className="absolute left-0 top-1/2 z-10 hidden -translate-x-1/2 -translate-y-1/2 rounded-full border bg-white p-1.5 opacity-70 shadow-xl hover:opacity-100 active:scale-95 disabled:hidden md:block"
         >
           <ChevronLeft className="h-6 w-6" />
         </button>
-        <div className="overflow-x-auto">
-          <div className="grid grid-cols-2 gap-1 whitespace-nowrap md:grid-cols-3 lg:grid-cols-4">
-            {visibleShoes.map((shoeName) => (
-              <Shoe key={shoeName} shoeName={shoeName} />
-            ))}
-          </div>
-        </div>
         <button
+          aria-label="Next"
           onClick={handleNext}
-          className="absolute right-0 top-1/2 z-10 -translate-y-1/2 translate-x-1/2 rounded-full border bg-white p-2 shadow-xl"
-          disabled={startIndex + visibleCount >= shoeNames.length}
+          disabled={startIndex >= maxIndex}
+          className="absolute right-0 top-1/2 z-10 hidden -translate-y-1/2 translate-x-1/2 rounded-full border bg-white p-1.5 opacity-70 shadow-xl hover:opacity-100 active:scale-95 disabled:hidden md:block"
         >
           <ChevronRight className="h-6 w-6" />
         </button>
+
+        <div
+          ref={containerRef}
+          className={`${isMobile ? "overflow-x-auto" : "overflow-x-hidden"}`}
+        >
+          <div
+            className="flex flex-nowrap gap-2 transition-transform duration-300 ease-in-out"
+            style={{
+              transform: `translateX(-${offset}px)`,
+            }}
+          >
+            {shoeNames.map((shoeName) => (
+              <div key={shoeName} className="min-w-48 flex-shrink-0">
+                <Shoe shoeName={shoeName} />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </BoardWrapper>
   );
