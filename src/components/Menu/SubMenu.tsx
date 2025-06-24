@@ -23,7 +23,7 @@ const SubMenu = ({
         <Link
           key={subItem}
           href={subItemLinks[i] || "#"}
-          className="cursor-pointer px-14 py-3 text-black hover:text-gray-400 lg:invisible"
+          className="cursor-pointer px-12 py-3 text-black hover:text-gray-400 md:px-16 lg:invisible"
           onClick={(e) => {
             e.stopPropagation();
             setIsOpen(false);
