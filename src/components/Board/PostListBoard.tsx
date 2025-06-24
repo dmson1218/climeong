@@ -56,15 +56,21 @@ const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
         <div className="flex-center my-3 mb-4 h-12 text-xl">{boardTitle}</div>
         <div className="flex grow flex-col items-center">
           {postList.slice(0, postsToShow).map((post) => (
-            <PostLinkWithDate
-              key={post._id}
-              boardType={boardType}
-              _id={post._id}
-              title={post.title}
-              content={post.content}
-              createdAt={post.createdAt}
-              isLoading={isLoading}
-            />
+            <div key={post._id + "-postListWrapper"} className="w-full">
+              <PostLinkWithDate
+                key={post._id + "-postList"}
+                boardType={boardType}
+                _id={post._id}
+                title={post.title}
+                content={post.content}
+                createdAt={post.createdAt}
+                isLoading={isLoading}
+              />
+              <hr
+                key={post._id + "-postListDivider"}
+                className="my-4 w-full border-gray-300 sm:my-8"
+              />
+            </div>
           ))}
         </div>
         <div className="mx-auto flex w-full justify-end p-3 md:w-3/4 lg:w-3/5">

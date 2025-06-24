@@ -8,6 +8,7 @@ interface PostLinkWithDateProps {
   content: string;
   createdAt: string;
   isLoading: boolean;
+  width?: string;
 }
 
 const formatRelativeTimeUTC = (dateString: string): string => {
@@ -41,12 +42,13 @@ const PostLinkWithDate = ({
   content,
   createdAt,
   isLoading,
+  width = "w-11/12 md:w-3/4",
 }: PostLinkWithDateProps) => {
   return (
     <Link
       key={_id}
       href={`/${boardType}/${_id}`}
-      className="flex h-24 w-11/12 flex-col justify-between border-b py-4 md:h-48 md:w-3/4 md:py-8"
+      className={`mx-auto flex h-16 flex-col justify-between md:h-32 ${width}`}
     >
       {renderSkeleton(
         isLoading,

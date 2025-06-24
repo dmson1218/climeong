@@ -1,14 +1,25 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const Shoe = ({ shoeName }: { shoeName: string }) => {
+  const [manufacturer, model] = shoeName.split("_");
+
   return (
-    <Image
-      src={`/images/${shoeName}.jpg`}
-      alt={shoeName}
-      width={288}
-      height={288}
-      className="m-1 size-72 rounded-lg transition-transform duration-200 ease-in-out hover:scale-110 sm:m-2"
-    />
+    <Link href="" className="flex grow flex-col items-center">
+      <div className="relative aspect-square w-full overflow-hidden rounded-lg border border-gray-200">
+        <Image
+          src={`/images/${shoeName}.jpg`}
+          alt={shoeName}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+          className="object-cover"
+        />
+        <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/20 to-transparent px-2 py-1 text-left text-xs">
+          <div className="font-normal italic"># {manufacturer}</div>
+          <div className="font-normal italic"># {model}</div>
+        </div>
+      </div>
+    </Link>
   );
 };
 

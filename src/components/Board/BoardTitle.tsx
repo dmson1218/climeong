@@ -11,7 +11,7 @@ interface BoardTitleProps {
 
 const BoardTitle = ({ boardType, title, subTitle = "" }: BoardTitleProps) => {
   return (
-    <div className="layout flex h-16 items-center px-8 sm:px-12">
+    <div className="layout flex h-14 items-center px-8 md:px-12">
       <div className="flex grow flex-col justify-start">
         <div className="flex grow">
           <Link
@@ -28,7 +28,7 @@ const BoardTitle = ({ boardType, title, subTitle = "" }: BoardTitleProps) => {
       <div className="flex">
         <Link
           href={`/${boardType || ""}`}
-          className="hidden text-blue-500 hover:opacity-50 lg:block"
+          className="hidden text-blue-500 hover:opacity-50 md:block"
         >
           더보기
         </Link>
@@ -37,7 +37,7 @@ const BoardTitle = ({ boardType, title, subTitle = "" }: BoardTitleProps) => {
         href={`/${boardType || ""}`}
         className="overflow-hidden rounded-2xl"
       >
-        <ChevronRight className="block h-8 w-8 lg:hidden" />
+        <ChevronRight className="block h-8 w-8 md:hidden" />
       </Link>
     </div>
   );

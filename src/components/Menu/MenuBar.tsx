@@ -23,7 +23,7 @@ const MenuBar: React.FC<MenuStateProps> = ({ isOpen, setIsOpen }) => {
 
   return (
     <div
-      className="fixed inset-0 left-0 top-20 z-10 bg-white transition-opacity duration-500 ease-in-out lg:invisible"
+      className="fixed inset-0 left-0 top-20 z-20 bg-white transition-opacity duration-500 ease-in-out lg:invisible"
       style={{ opacity }}
     >
       <ul className="bg-white pt-5">

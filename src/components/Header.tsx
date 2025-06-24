@@ -16,9 +16,9 @@ const Header = () => {
 
   return (
     <>
-      <div className="fixed left-0 top-0 z-10 h-20 w-full border-b border-gray-200 bg-white">
+      <div className="fixed left-0 top-0 z-20 h-20 w-full border-b border-gray-200 bg-white">
         <div className="layout mt-5 flex justify-between">
-          <div className="flex justify-start px-8 sm:px-12">
+          <div className="flex w-48 justify-start px-8 md:px-12">
             <Link
               href="/"
               className="cursor-pointer pt-1 font-reko text-2xl font-medium"
