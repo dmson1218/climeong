@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { categories } from "../Category";
 import type { MenuStateProps } from "../Header";
-import MenuBarItem from "./MenuItem";
+import MenuItem from "./MenuItem";
 
 const MenuBar: React.FC<MenuStateProps> = ({ isOpen, setIsOpen }) => {
   const [showMenu, setShowMenu] = useState(false);
@@ -28,7 +28,7 @@ const MenuBar: React.FC<MenuStateProps> = ({ isOpen, setIsOpen }) => {
     >
       <ul className="bg-white pt-5">
         {categories.map((item) => (
-          <MenuBarItem key={item.title} item={item} setIsOpen={setIsOpen} />
+          <MenuItem key={item.title} item={item} setIsOpen={setIsOpen} />
         ))}
       </ul>
     </div>

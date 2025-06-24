@@ -46,7 +46,7 @@ const PostLinkWithDate = ({
     <Link
       key={_id}
       href={`/${boardType}/${_id}`}
-      className="flex h-28 w-full flex-col justify-between border-b py-6 md:h-48 md:w-3/4 md:py-8 lg:w-3/5"
+      className="flex h-24 w-11/12 flex-col justify-between border-b py-4 md:h-48 md:w-3/4 md:py-8"
     >
       {renderSkeleton(
         isLoading,

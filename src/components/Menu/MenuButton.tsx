@@ -18,14 +18,14 @@ const MenuButton: React.FC<MenuStateProps> = ({ isOpen, setIsOpen }) => {
   };
 
   return (
-    <div className="mr-1 mt-2 flex w-32 items-center justify-end lg:invisible">
+    <div className="mt-2 flex w-32 items-center justify-end lg:invisible">
       <Image
         src={isOpen ? "/icons/close.png" : "/icons/menu.png"}
         alt="menu"
         width={22}
         height={22}
         priority
-        className="mr-6 cursor-pointer pb-2"
+        className="mr-8 cursor-pointer pb-2 sm:mr-12"
         onClick={handleClick}
       />
     </div>
