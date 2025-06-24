@@ -51,10 +51,10 @@ const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
   }, [boardType]);
 
   return (
-    <div className="layout mt-24 grid min-h-[calc(100vh-6rem-60px)]">
+    <div className="layout mt-24 grid min-h-[calc(100vh-6rem-60px)] w-full">
       <BoardWrapper>
         <div className="flex-center my-3 mb-4 h-12 text-xl">{boardTitle}</div>
-        <div className="flex grow flex-col items-center gap-4">
+        <div className="flex grow flex-col items-center">
           {postList.slice(0, postsToShow).map((post) => (
             <PostLinkWithDate
               key={post._id}

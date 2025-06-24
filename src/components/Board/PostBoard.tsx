@@ -2,7 +2,7 @@
 
 import BoardWrapper from "@/components/Board/BoardWrapper";
 import { FormatContent } from "@/components/FormatContent";
-import useSkeleton from "@/hooks/useSkeleton";
+import renderSkeleton from "@/utils/renderSkeleton";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -38,18 +38,15 @@ const PostBoard = ({ boardType }: PostBoardProps) => {
   return (
     <div className="layout mt-24 flex min-h-[calc(100vh-6rem-60px)]">
       <BoardWrapper>
-        {useSkeleton(
+        {renderSkeleton(
           isLoading,
-          <div className="flex-center mx-auto my-3 mb-4 h-12 w-80 text-xl">
+          <div className="flex-center mx-auto mb-8 mt-3 min-h-6 w-full max-w-xl text-xl lg:w-1/2">
             {post.title}
           </div>,
         )}
-        {useSkeleton(
-          isLoading,
-          <div className="mx-auto w-full grow p-3 md:w-3/4 lg:w-3/5">
-            <FormatContent content={post.content} />
-          </div>,
-        )}
+        <div className="mx-auto w-full grow md:w-3/4 lg:w-3/5">
+          <FormatContent isLoading={isLoading} content={post.content} />
+        </div>
       </BoardWrapper>
     </div>
   );

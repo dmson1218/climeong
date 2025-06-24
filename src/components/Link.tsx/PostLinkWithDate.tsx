@@ -1,4 +1,4 @@
-import useSkeleton from "@/hooks/useSkeleton";
+import renderSkeleton from "@/utils/renderSkeleton";
 import Link from "next/link";
 
 interface PostLinkWithDateProps {
@@ -42,23 +42,31 @@ const PostLinkWithDate = ({
   createdAt,
   isLoading,
 }: PostLinkWithDateProps) => {
-  return useSkeleton(
-    isLoading,
+  return (
     <Link
       key={_id}
       href={`/${boardType}/${_id}`}
-      className="mx-auto flex h-24 w-full flex-col rounded border-y p-3 hover:bg-slate-100 md:w-3/4 lg:w-3/5"
+      className="flex h-28 w-full flex-col justify-between border-b py-6 md:h-48 md:w-3/4 md:py-8 lg:w-3/5"
     >
-      <div className="flex h-6 items-center justify-between">
-        <div className="truncate text-base font-medium">{title}</div>
-        <div className="text-xs text-gray-500">
-          {formatRelativeTimeUTC(createdAt)}
-        </div>
-      </div>
-      {content && (
-        <div className="mt-1 line-clamp-2 text-sm text-gray-600">{content}</div>
+      {renderSkeleton(
+        isLoading,
+        <div className="line-clamp-1 h-6 w-11/12 text-lg font-medium">
+          {title}
+        </div>,
       )}
-    </Link>,
+      {renderSkeleton(
+        isLoading,
+        <div className="hidden h-12 w-full font-normal md:line-clamp-2">
+          {content}
+        </div>,
+      )}
+      {renderSkeleton(
+        isLoading,
+        <div className="h-5 w-1/5 text-sm font-normal text-gray-500 md:text-base">
+          {formatRelativeTimeUTC(createdAt)}
+        </div>,
+      )}
+    </Link>
   );
 };
 

@@ -1,4 +1,4 @@
-import useSkeleton from "@/hooks/useSkeleton";
+import useSkeleton from "@/utils/renderSkeleton";
 import Link from "next/link";
 
 interface PostLinkProps {
