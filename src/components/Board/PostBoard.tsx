@@ -40,13 +40,14 @@ const PostBoard = ({ boardType }: PostBoardProps) => {
       <BoardWrapper>
         {renderSkeleton(
           isLoading,
-          <div className="flex-center mx-auto mb-8 mt-3 min-h-6 w-full max-w-xl text-xl lg:w-1/2">
+          <div className="flex-center mx-auto mb-8 mt-3 min-h-6 w-5/6 max-w-xl text-xl font-medium">
             {post.title}
           </div>,
         )}
-        <div className="mx-auto w-full grow md:w-3/4 lg:w-3/5">
+        <div className="mx-auto w-full grow border-b border-gray-200 font-normal md:w-3/4 lg:w-3/5">
           <FormatContent isLoading={isLoading} content={post.content} />
         </div>
+        <div className="mx-auto w-full font-normal md:w-3/4 lg:w-3/5">댓글</div>
       </BoardWrapper>
     </div>
   );
