@@ -28,6 +28,7 @@ const BoardTitle = ({ boardType, title, subTitle = "" }: BoardTitleProps) => {
       <div className="flex">
         <Link
           href={`/${boardType || ""}`}
+          aria-label="더보기"
           className="hidden text-blue-600 hover:opacity-50 md:block"
         >
           더보기
@@ -35,6 +36,7 @@ const BoardTitle = ({ boardType, title, subTitle = "" }: BoardTitleProps) => {
       </div>
       <Link
         href={`/${boardType || ""}`}
+        aria-label="더보기"
         className="overflow-hidden rounded-2xl"
       >
         <ChevronRight className="block h-8 w-8 md:hidden" />
