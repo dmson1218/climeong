@@ -13,15 +13,15 @@ const bannerItems = [
   },
   {
     href: "https://www.instagram.com/angmond_climb/",
-    src: "/images/Instagram.jpeg",
+    src: "/images/Instagram2.jpeg",
     alt: "Main Banner 2",
-    label: "angmond_climb",
+    label: "_son_climb",
   },
   {
     href: "https://www.instagram.com/angmond_climb/",
-    src: "/images/Instagram.jpeg",
+    src: "/images/Instagram3.jpeg",
     alt: "Main Banner 3",
-    label: "angmond_climb",
+    label: "meong_limbing",
   },
 ];
 
