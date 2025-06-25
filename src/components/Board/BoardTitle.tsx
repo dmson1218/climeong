@@ -11,7 +11,7 @@ interface BoardTitleProps {
 
 const BoardTitle = ({ boardType, title, subTitle = "" }: BoardTitleProps) => {
   return (
-    <div className="layout flex h-14 items-center px-8 md:px-12">
+    <div className="layout flex h-14 items-center px-4 md:px-12">
       <div className="flex grow flex-col justify-start">
         <div className="flex grow">
           <Link
@@ -37,9 +37,9 @@ const BoardTitle = ({ boardType, title, subTitle = "" }: BoardTitleProps) => {
       <Link
         href={`/${boardType || ""}`}
         aria-label="더보기"
-        className="overflow-hidden rounded-2xl"
+        className="block h-8 w-6 overflow-hidden rounded-2xl md:hidden"
       >
-        <ChevronRight className="block h-8 w-8 md:hidden" />
+        <ChevronRight className="h-8 w-8" />
       </Link>
     </div>
   );

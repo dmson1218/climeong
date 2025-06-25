@@ -25,7 +25,7 @@ const PreviewBoard = ({ boardType }: { boardType: string }) => {
   }, [boardType]);
 
   return (
-    <div className="flex-center mx-8 my-4 grow flex-col md:mx-12">
+    <div className="flex-center m-4 grow flex-col md:mx-12">
       {posts.map((post) => (
         <div key={post._id + "-previewWrapper"} className="w-full">
           <PostLinkWithDate
