@@ -86,7 +86,7 @@ const ShoesBoard = () => {
 
   return (
     <BoardWrapper>
-      <div className="relative w-full">
+      <div className="relative mt-2 w-full">
         <button
           aria-label="Prev"
           onClick={handlePrev}
@@ -103,21 +103,18 @@ const ShoesBoard = () => {
         >
           <ChevronRight className="h-6 w-6" />
         </button>
-
         <div
           ref={containerRef}
           className={`${isMobile ? "overflow-x-auto" : "overflow-x-hidden"}`}
         >
           <div
-            className="flex flex-nowrap gap-2 transition-transform duration-300 ease-in-out"
+            className="flex flex-nowrap gap-1 transition-transform duration-300 ease-in-out md:gap-2"
             style={{
               transform: `translateX(-${offset}px)`,
             }}
           >
             {shoeNames.map((shoeName) => (
-              <div key={shoeName} className="min-w-48 flex-shrink-0">
-                <Shoe shoeName={shoeName} />
-              </div>
+              <Shoe key={shoeName} shoeName={shoeName} />
             ))}
           </div>
         </div>

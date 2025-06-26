@@ -6,7 +6,7 @@ const Shoe = ({ shoeName }: { shoeName: string }) => {
 
   return (
     <Link href="" className="flex grow flex-col items-center">
-      <div className="relative aspect-square w-48 overflow-hidden rounded-lg border border-gray-200">
+      <div className="relative aspect-square w-36 overflow-hidden rounded-lg border border-gray-200 md:w-48">
         <Image
           src={`/images/shoes/${shoeName}.jpg`}
           alt={shoeName}

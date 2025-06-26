@@ -12,12 +12,12 @@ const Brands = [
 
 const BrandBoard = () => {
   return (
-    <div className="layout grid grid-cols-6 place-items-center gap-0.5 p-4 pb-4 pt-2 md:gap-1 md:px-12">
+    <div className="layout grid grid-cols-6 place-items-center gap-1 px-4 md:gap-2 md:px-12">
       {Brands.map((brand) => (
         <Link
           key={brand}
           href="/brands"
-          className="relative aspect-square w-full overflow-hidden rounded-2xl border-2 border-gray-200 bg-white"
+          className="relative aspect-square w-full overflow-hidden rounded-3xl border-2 border-gray-200 bg-white"
         >
           <div className="flex h-full w-full items-center justify-center transition-transform duration-300 hover:scale-110">
             <Image

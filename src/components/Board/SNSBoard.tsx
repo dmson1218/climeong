@@ -53,10 +53,10 @@ const SNSBoard = () => {
   };
 
   return (
-    <div className="relative my-4 h-auto w-full px-4 md:px-12">
+    <div className="relative h-auto w-full md:px-12">
       <div
         ref={containerRef}
-        className="flex snap-x snap-mandatory overflow-x-auto scroll-smooth rounded-lg"
+        className="flex snap-x snap-mandatory overflow-x-auto scroll-smooth md:rounded-lg"
       >
         {bannerItems.map((item, idx) => (
           <Link
