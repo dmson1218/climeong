@@ -53,7 +53,7 @@ const SNSBoard = () => {
   };
 
   return (
-    <div className="relative h-auto w-full md:px-12">
+    <div className="relative h-auto w-full pb-2 md:px-12">
       <div
         ref={containerRef}
         className="flex snap-x snap-mandatory overflow-x-auto scroll-smooth md:rounded-lg"

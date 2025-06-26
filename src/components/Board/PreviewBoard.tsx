@@ -25,7 +25,7 @@ const PreviewBoard = ({ boardType }: { boardType: string }) => {
   }, [boardType]);
 
   return (
-    <div className="mt-4 flex grow flex-col items-center md:mx-8">
+    <div className="mt-2 flex grow flex-col items-center md:mx-8 md:mt-4">
       {postList.map((post) => (
         <div key={post._id + "-postListWrapper"} className="w-full">
           <PostLinkWithDate
@@ -39,7 +39,7 @@ const PreviewBoard = ({ boardType }: { boardType: string }) => {
           />
           <hr
             key={post._id + "-postListDivider"}
-            className="m-4 border-gray-300 md:mx-4 md:my-8"
+            className="m-4 border-gray-300 md:mx-4 md:my-6"
           />
         </div>
       ))}
