@@ -62,7 +62,7 @@ const SNSBoard = () => {
           <Link
             key={idx}
             href={item.href}
-            className="group relative aspect-[5/3] w-full flex-shrink-0 snap-start overflow-hidden bg-gray-200 md:aspect-[2/1]"
+            className="group relative aspect-[2/1] w-full flex-shrink-0 snap-start overflow-hidden bg-gray-200"
           >
             <Image
               src={item.src}

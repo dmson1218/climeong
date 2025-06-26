@@ -12,7 +12,7 @@ const Brands = [
 
 const BrandBoard = () => {
   return (
-    <div className="layout grid grid-cols-6 place-items-center gap-1 p-4 pb-4 pt-2 md:px-12">
+    <div className="layout grid grid-cols-6 place-items-center gap-0.5 p-4 pb-4 pt-2 md:gap-1 md:px-12">
       {Brands.map((brand) => (
         <Link
           key={brand}

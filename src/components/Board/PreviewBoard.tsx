@@ -36,7 +36,6 @@ const PreviewBoard = ({ boardType }: { boardType: string }) => {
             content={post.content}
             createdAt={post.createdAt}
             isLoading={isLoading}
-            width="w-full"
           />
           <hr
             key={post._id + "-previewDivider"}
