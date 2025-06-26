@@ -51,7 +51,7 @@ const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
   }, [boardType]);
 
   return (
-    <div className="layout mt-24 grid min-h-[calc(100vh-6rem-60px)] w-full">
+    <div className="layout mt-20 grid min-h-[calc(100vh-6rem-60px)] w-full md:mt-24">
       <BoardWrapper>
         <div className="flex-center my-3 mb-4 h-12 text-xl">{boardTitle}</div>
         <div className="flex grow flex-col items-center">
@@ -68,7 +68,7 @@ const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
               />
               <hr
                 key={post._id + "-postListDivider"}
-                className="my-4 w-full border-gray-300 md:my-8"
+                className="m-4 border-gray-300 md:mx-0 md:my-8"
               />
             </div>
           ))}

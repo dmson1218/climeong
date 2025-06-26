@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import PostLinkWithDate from "../Link.tsx/PostLinkWithDate";
 
 const PreviewBoard = ({ boardType }: { boardType: string }) => {
-  const [posts, setPosts] = useState<Post[]>(
+  const [postList, setPostList] = useState<Post[]>(
     Array.from({ length: 3 }).map((_, idx) => ({
       _id: `dummy-${idx}`,
       title: "",
@@ -19,17 +19,17 @@ const PreviewBoard = ({ boardType }: { boardType: string }) => {
     fetch(`/api/${boardType}?count=3`)
       .then((res) => res.json())
       .then((data) => {
-        setPosts(data);
+        setPostList(data);
         setIsLoading(false);
       });
   }, [boardType]);
 
   return (
-    <div className="flex-center m-4 grow flex-col md:mx-12">
-      {posts.map((post) => (
-        <div key={post._id + "-previewWrapper"} className="w-full">
+    <div className="mt-4 flex grow flex-col items-center md:mx-8">
+      {postList.map((post) => (
+        <div key={post._id + "-postListWrapper"} className="w-full">
           <PostLinkWithDate
-            key={post._id + "-preview"}
+            key={post._id + "-postList"}
             boardType={boardType}
             _id={post._id}
             title={post.title}
@@ -38,8 +38,8 @@ const PreviewBoard = ({ boardType }: { boardType: string }) => {
             isLoading={isLoading}
           />
           <hr
-            key={post._id + "-previewDivider"}
-            className="my-4 w-full border-gray-300 md:my-8"
+            key={post._id + "-postListDivider"}
+            className="m-4 border-gray-300 md:mx-4 md:my-8"
           />
         </div>
       ))}

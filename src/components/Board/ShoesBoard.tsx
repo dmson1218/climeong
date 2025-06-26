@@ -113,9 +113,11 @@ const ShoesBoard = () => {
               transform: `translateX(-${offset}px)`,
             }}
           >
+            {isMobile && <div className="w-3 flex-shrink-0" />}
             {shoeNames.map((shoeName) => (
               <Shoe key={shoeName} shoeName={shoeName} />
             ))}
+            {isMobile && <div className="w-3 flex-shrink-0" />}
           </div>
         </div>
       </div>
