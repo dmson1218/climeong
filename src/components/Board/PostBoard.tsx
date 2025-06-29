@@ -36,18 +36,18 @@ const PostBoard = ({ boardType }: PostBoardProps) => {
   }, [boardType, id]);
 
   return (
-    <div className="layout mt-20 flex min-h-[calc(100vh-6rem-60px)] md:mt-24">
+    <div className="layout mt-20 flex min-h-[calc(100vh-8rem)] md:mt-24 md:min-h-[calc(100vh-9rem)]">
       <BoardWrapper>
         {renderSkeleton(
           isLoading,
-          <div className="flex-center mx-auto mb-8 mt-3 min-h-6 w-5/6 max-w-xl text-xl font-medium">
+          <div className="flex-center mb-8 mt-3 min-h-6 text-xl font-medium">
             {post.title}
           </div>,
         )}
-        <div className="mx-auto w-full grow border-b border-gray-200 font-normal md:w-3/4 lg:w-3/5">
+        <div className="mx-4 grow border-b border-gray-200 font-normal md:mx-0">
           <FormatContent isLoading={isLoading} content={post.content} />
         </div>
-        <div className="mx-auto w-full font-normal md:w-3/4 lg:w-3/5">댓글</div>
+        <div className="mx-4 w-full font-normal md:mx-0">댓글</div>
       </BoardWrapper>
     </div>
   );

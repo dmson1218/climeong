@@ -6,7 +6,7 @@ import SNSBoard from "./SNSBoard";
 
 const MainBoard = () => {
   return (
-    <div className="layout mt-20 min-h-[calc(100vh-6rem-60px)] bg-white md:mt-24">
+    <div className="layout mt-20 min-h-[calc(100vh-8rem)] bg-white md:mt-24 md:min-h-[calc(100vh-9rem)]">
       <BoardTitle title="이달의 클라이머를 소개합니다🤭" />
       <SNSBoard />
       <br />
