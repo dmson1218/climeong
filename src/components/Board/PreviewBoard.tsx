@@ -16,7 +16,7 @@ const PreviewBoard = ({ boardType }: { boardType: string }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`/api/${boardType}?count=3`)
+    fetch(`/api/${boardType}?skip=0&limit=3`)
       .then((res) => res.json())
       .then((data) => {
         setPostList(data);

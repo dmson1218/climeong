@@ -2,7 +2,8 @@ import { getClient } from "@/database/dbClient";
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
-  const count = Number(url.searchParams.get("count") || 10);
+  const skip = Number(url.searchParams.get("skip") || 0);
+  const limit = Number(url.searchParams.get("limit") || 10);
 
   try {
     const client = await getClient();
@@ -16,7 +17,8 @@ export async function GET(request: Request) {
     const news = await collection
       .find({}, { projection: { title: 1, content: 1, createdAt: 1 } })
       .sort({ createdAt: -1 })
-      .limit(count)
+      .skip(skip)
+      .limit(limit)
       .toArray();
 
     return new Response(JSON.stringify(news), { status: 200 });

@@ -1,70 +1,113 @@
 "use client";
 
 import BoardWrapper from "@/components/Board/BoardWrapper";
+import PostLinkWithDate from "@/components/Link/PostLinkWithDate";
 import type { Post } from "@/types/post";
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import PostLinkWithDate from "../Link.tsx/PostLinkWithDate";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 interface PostListBoardProps {
   boardType: string;
   boardTitle: string;
 }
 
-const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [postList, setPostList] = useState<Post[]>(
-    Array.from({ length: 5 }).map((_, idx) => ({
-      _id: `dummy-${idx}`,
-      title: "",
-      content: "",
-      createdAt: new Date().toISOString(),
-    })),
-  );
-  const [postsToShow, setPostsToShow] = useState<number>(10);
+const DUMMY_COUNT = 10;
 
-  const updatePostsToShow = () => {
-    const height = window.innerHeight;
-    if (height >= 800) {
-      setPostsToShow(10);
-    } else if (height >= 600) {
-      setPostsToShow(7);
-    } else {
-      setPostsToShow(5);
-    }
-  };
+const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
+  const limit = DUMMY_COUNT;
+
+  const [skip, setSkip] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
+  const [isLoading, setLoading] = useState(true);
+  const loaderRef = useRef<HTMLAnchorElement>(null);
+
+  const createDummyPosts = useCallback(
+    () =>
+      Array.from({ length: DUMMY_COUNT }).map((_, idx) => ({
+        _id: `dummy-${skip}-${idx}`,
+        title: "",
+        content: "",
+        createdAt: new Date().toISOString(),
+      })),
+    [skip],
+  );
+
+  const [postList, setPostList] = useState<Post[]>(createDummyPosts());
+
+  const fetchPosts = useCallback(
+    async (skipCount: number) => {
+      const res = await fetch(
+        `/api/${boardType}?skip=${skipCount}&limit=${limit}`,
+      );
+      return res.json();
+    },
+    [boardType, limit],
+  );
 
   useEffect(() => {
-    fetch(`/api/${boardType}?count=10`)
-      .then((res) => res.json())
-      .then((data) => {
-        setIsLoading(false);
-        setPostList(data);
-      });
+    (async () => {
+      setLoading(true);
+      const data = await fetchPosts(0);
+      setPostList(data);
+      setSkip(data.length);
+      setHasMore(data.length === limit);
+      setLoading(false);
+    })();
+  }, [fetchPosts, limit]);
 
-    updatePostsToShow();
-    window.addEventListener("resize", updatePostsToShow);
+  const loadMore = useCallback(async () => {
+    if (isLoading || !hasMore) return;
+
+    setLoading(true);
+    setPostList((prev) => [...prev, ...createDummyPosts()]);
+
+    const data = await fetchPosts(skip);
+
+    setPostList((prev) => {
+      const filtered = prev.filter((post) => !post._id.startsWith("dummy-"));
+      return [...filtered, ...data];
+    });
+
+    setSkip((prev) => prev + data.length);
+    setHasMore(data.length === limit);
+    setLoading(false);
+  }, [isLoading, hasMore, fetchPosts, skip, limit, createDummyPosts]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          loadMore();
+        }
+      },
+      {
+        threshold: 0,
+      },
+    );
+
+    const current = loaderRef.current;
+    if (current) observer.observe(current);
 
     return () => {
-      window.removeEventListener("resize", updatePostsToShow);
+      if (current) observer.unobserve(current);
     };
-  }, [boardType]);
+  }, [loadMore]);
 
   return (
     <div className="layout mt-20 min-h-[calc(100vh-8rem)] md:mt-24 md:min-h-[calc(100vh-9rem)]">
       <BoardWrapper>
         <div className="flex-center mb-4 h-12 text-xl">{boardTitle}</div>
-        <div className="flex grow flex-col items-center">
-          {postList.slice(0, postsToShow).map((post) => (
+        <div className="mx-auto flex w-full max-w-3xl grow flex-col items-center">
+          {postList.map((post, index) => (
             <div key={post._id + "-postListWrapper"} className="w-full">
               <PostLinkWithDate
                 key={post._id + "-postList"}
+                ref={index === postList.length - 1 ? loaderRef : null}
                 boardType={boardType}
                 _id={post._id}
                 title={post.title}
                 content={post.content}
                 createdAt={post.createdAt}
-                isLoading={isLoading}
+                isLoading={post._id.startsWith("dummy-") && isLoading}
               />
               <hr
                 key={post._id + "-postListDivider"}
@@ -72,9 +115,6 @@ const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
               />
             </div>
           ))}
-        </div>
-        <div className="mx-auto flex w-full justify-end p-3 md:w-3/4 lg:w-3/5">
-          <Link href={`/${boardType}/create`}>글쓰기</Link>
         </div>
       </BoardWrapper>
     </div>

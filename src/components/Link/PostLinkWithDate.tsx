@@ -2,6 +2,7 @@ import renderSkeleton from "@/utils/renderSkeleton";
 import Link from "next/link";
 
 interface PostLinkWithDateProps {
+  ref?: React.Ref<HTMLAnchorElement>;
   boardType: string;
   _id: string;
   title: string;
@@ -35,6 +36,7 @@ const formatRelativeTimeUTC = (dateString: string): string => {
 };
 
 const PostLinkWithDate = ({
+  ref,
   boardType,
   _id,
   title,
@@ -45,6 +47,7 @@ const PostLinkWithDate = ({
   return (
     <Link
       key={_id}
+      ref={ref}
       href={`/${boardType}/${_id}`}
       className="mx-6 flex h-16 grow flex-col justify-between md:h-32"
     >
