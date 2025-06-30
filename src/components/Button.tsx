@@ -22,19 +22,25 @@ const Button: React.FC<Category> = ({
         {hasSubItems ? (
           <div className="hover:cursor-pointer">{title}</div>
         ) : (
-          <Link href={link || "#"}>{title}</Link>
+          <Link href={link || "#"} className="hover:text-gray-400">
+            {title}
+          </Link>
         )}
       </div>
       {hasSubItems && (
         <div
-          className={`absolute top-10 z-20 flex w-full flex-col gap-3 rounded-xl border bg-white p-4 text-base shadow-lg transition-all duration-300 ease-out ${
+          className={`absolute top-10 z-20 flex w-full flex-col gap-3 rounded-xl border bg-white p-4 text-base font-semibold shadow-lg transition-all duration-300 ease-out ${
             isHovered
               ? "pointer-events-auto translate-y-0 opacity-100"
               : "pointer-events-none -translate-y-5 opacity-0"
           } `}
         >
           {subItems.map((item, index) => (
-            <Link key={item} href={subItemLinks?.[index] || "#"}>
+            <Link
+              key={item}
+              href={subItemLinks?.[index] || "#"}
+              className="hover:text-gray-400"
+            >
               {item}
             </Link>
           ))}

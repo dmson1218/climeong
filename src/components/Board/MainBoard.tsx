@@ -17,11 +17,13 @@ const MainBoard = () => {
       />
       <ShoesBoard />
       <br />
-      <BoardTitle title="마음에 드는 브랜드를 찾아보세요!" />
+      <BoardTitle title="믿고 신는 브랜드, 여기 다 있어요!" />
       <BrandBoard />
       <br />
-      <BoardTitle boardType="news" title="최신 소식을 확인해 보세요😎" />
+      <BoardTitle boardType="news" title="한 발 앞서는 클라이밍 뉴스😎" />
       <PreviewBoard boardType="news" />
+
+      <br />
     </div>
   );
 };
