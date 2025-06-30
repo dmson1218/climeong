@@ -1,7 +1,7 @@
 "use client";
 
 import BoardWrapper from "@/components/Board/BoardWrapper";
-import PostLink from "@/components/Link.tsx/PostLink";
+import PostLink from "@/components/Link/PostLink";
 import type { Post } from "@/types/post";
 import { useEffect, useState } from "react";
 

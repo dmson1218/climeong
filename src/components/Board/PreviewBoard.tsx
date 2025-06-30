@@ -2,7 +2,7 @@
 
 import type { Post } from "@/types/post";
 import { useEffect, useState } from "react";
-import PostLinkWithDate from "../Link.tsx/PostLinkWithDate";
+import PostLinkWithDate from "../Link/PostLinkWithDate";
 
 const PreviewBoard = ({ boardType }: { boardType: string }) => {
   const [postList, setPostList] = useState<Post[]>(
