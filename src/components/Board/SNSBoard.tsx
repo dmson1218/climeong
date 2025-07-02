@@ -12,16 +12,16 @@ const bannerItems = [
     label: "angmond_climb",
   },
   {
-    href: "https://www.instagram.com/angmond_climb/",
+    href: "https://www.instagram.com/_son_climb/",
     src: "/images/Instagram2.jpeg",
     alt: "Main Banner 2",
     label: "_son_climb",
   },
   {
-    href: "https://www.instagram.com/angmond_climb/",
+    href: "https://www.instagram.com/want_saiki_kusuo/",
     src: "/images/Instagram3.jpeg",
     alt: "Main Banner 3",
-    label: "meong_limbing",
+    label: "want_saiki_kusuo",
   },
 ];
 
