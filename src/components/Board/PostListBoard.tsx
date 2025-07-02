@@ -15,7 +15,7 @@ const DUMMY_COUNT = 10;
 const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
   const limit = DUMMY_COUNT;
 
-  const [skip, setSkip] = useState(0);
+  const [afterDate, setAfterDate] = useState<string | null>(null);
   const [hasMore, setHasMore] = useState(true);
   const [isLoading, setLoading] = useState(true);
   const loaderRef = useRef<HTMLAnchorElement>(null);
@@ -23,21 +23,23 @@ const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
   const createDummyPosts = useCallback(
     () =>
       Array.from({ length: DUMMY_COUNT }).map((_, idx) => ({
-        _id: `dummy-${skip}-${idx}`,
+        _id: `dummy-${idx}`,
         title: "",
         content: "",
         createdAt: new Date().toISOString(),
       })),
-    [skip],
+    [],
   );
 
   const [postList, setPostList] = useState<Post[]>(createDummyPosts());
 
   const fetchPosts = useCallback(
-    async (skipCount: number) => {
-      const res = await fetch(
-        `/api/${boardType}?skip=${skipCount}&limit=${limit}`,
-      );
+    async (afterDate?: string | null) => {
+      const url = new URL(`/api/${boardType}`, window.location.origin);
+      if (afterDate) url.searchParams.set("afterDate", afterDate);
+      url.searchParams.set("limit", limit.toString());
+
+      const res = await fetch(url.toString());
       return res.json();
     },
     [boardType, limit],
@@ -46,9 +48,9 @@ const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
   useEffect(() => {
     (async () => {
       setLoading(true);
-      const data = await fetchPosts(0);
+      const data = await fetchPosts(null);
       setPostList(data);
-      setSkip(data.length);
+      setAfterDate(data.length > 0 ? data[data.length - 1].createdAt : null);
       setHasMore(data.length === limit);
       setLoading(false);
     })();
@@ -60,17 +62,17 @@ const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
     setLoading(true);
     setPostList((prev) => [...prev, ...createDummyPosts()]);
 
-    const data = await fetchPosts(skip);
+    const data = await fetchPosts(afterDate);
 
     setPostList((prev) => {
       const filtered = prev.filter((post) => !post._id.startsWith("dummy-"));
       return [...filtered, ...data];
     });
 
-    setSkip((prev) => prev + data.length);
+    setAfterDate(data.length > 0 ? data[data.length - 1].createdAt : null);
     setHasMore(data.length === limit);
     setLoading(false);
-  }, [isLoading, hasMore, fetchPosts, skip, limit, createDummyPosts]);
+  }, [isLoading, hasMore, fetchPosts, limit, createDummyPosts, afterDate]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

@@ -2,7 +2,7 @@ import { getClient } from "@/database/dbClient";
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
-  const skip = Number(url.searchParams.get("skip") || 0);
+  const afterDate = url.searchParams.get("afterDate");
   const limit = Number(url.searchParams.get("limit") || 10);
 
   try {
@@ -14,10 +14,11 @@ export async function GET(request: Request) {
     }
     const collection = db.collection(collectionName);
 
+    const query = afterDate ? { createdAt: { $lt: new Date(afterDate) } } : {};
+
     const news = await collection
-      .find({}, { projection: { title: 1, content: 1, createdAt: 1 } })
+      .find(query, { projection: { title: 1, content: 1, createdAt: 1 } })
       .sort({ createdAt: -1 })
-      .skip(skip)
       .limit(limit)
       .toArray();
 
@@ -26,9 +27,7 @@ export async function GET(request: Request) {
     console.error(error);
     return new Response(
       JSON.stringify({ error: "최신 소식을 가져오는 데 실패했습니다." }),
-      {
-        status: 500,
-      },
+      { status: 500 },
     );
   }
 }
