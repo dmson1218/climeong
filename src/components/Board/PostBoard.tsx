@@ -21,7 +21,7 @@ const PostBoard = ({ boardType }: PostBoardProps) => {
   useEffect(() => {
     async function fetchPost() {
       try {
-        const res = await fetch(`/api/${boardType}/${id}`);
+        const res = await fetch(`/api/posts/${id}?postType=${boardType}`);
         if (!res.ok) throw new Error("정보를 가져오는 중 오류가 발생했습니다.");
         const data = await res.json();
         setIsLoading(false);

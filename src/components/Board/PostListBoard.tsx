@@ -34,10 +34,13 @@ const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
   const [postList, setPostList] = useState<Post[]>(createDummyPosts());
 
   const fetchPosts = useCallback(
-    async (afterDate?: string | null) => {
-      const url = new URL(`/api/${boardType}`, window.location.origin);
-      if (afterDate) url.searchParams.set("afterDate", afterDate);
-      url.searchParams.set("limit", limit.toString());
+    async (afterDate?: string) => {
+      const url = new URL(`/api/posts`, location.origin);
+      url.searchParams.set("postType", boardType);
+      url.searchParams.set("limit", String(limit));
+      if (afterDate) {
+        url.searchParams.set("afterDate", afterDate);
+      }
 
       const res = await fetch(url.toString());
       return res.json();
@@ -48,7 +51,7 @@ const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
   useEffect(() => {
     (async () => {
       setLoading(true);
-      const data = await fetchPosts(null);
+      const data = await fetchPosts(undefined);
       setPostList(data);
       setAfterDate(data.length > 0 ? data[data.length - 1].createdAt : null);
       setHasMore(data.length === limit);
@@ -62,7 +65,7 @@ const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
     setLoading(true);
     setPostList((prev) => [...prev, ...createDummyPosts()]);
 
-    const data = await fetchPosts(afterDate);
+    const data = await fetchPosts(afterDate ?? undefined);
 
     setPostList((prev) => {
       const filtered = prev.filter((post) => !post._id.startsWith("dummy-"));

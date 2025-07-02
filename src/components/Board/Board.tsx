@@ -23,7 +23,7 @@ const Board = ({ boardType, boardTitle, count }: BoardProps) => {
   );
 
   useEffect(() => {
-    fetch(`/api/${boardType}?count=${count}`)
+    fetch(`/api/posts?postType=${boardType}&count=${count}`)
       .then((res) => res.json())
       .then((data) => {
         setIsLoading(false);

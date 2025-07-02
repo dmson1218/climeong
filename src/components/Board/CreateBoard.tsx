@@ -19,7 +19,7 @@ const CreateBoard = ({ boardType, boardTitle }: CreateBoardProps) => {
     }
 
     try {
-      const response = await fetch(`/api/${boardType}`, {
+      const response = await fetch(`/api/posts?postType=${boardType}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
