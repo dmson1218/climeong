@@ -3,6 +3,7 @@
 import BoardWrapper from "@/components/Board/BoardWrapper";
 import PostLinkWithDate from "@/components/Link/PostLinkWithDate";
 import type { Post } from "@/types/post";
+import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 interface PostListBoardProps {
@@ -15,7 +16,7 @@ const DUMMY_COUNT = 10;
 const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
   const limit = DUMMY_COUNT;
 
-  const [afterDate, setAfterDate] = useState<string | null>(null);
+  const [afterId, setAfterId] = useState<string | null>(null);
   const [hasMore, setHasMore] = useState(true);
   const [isLoading, setLoading] = useState(true);
   const loaderRef = useRef<HTMLAnchorElement>(null);
@@ -34,12 +35,12 @@ const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
   const [postList, setPostList] = useState<Post[]>(createDummyPosts());
 
   const fetchPosts = useCallback(
-    async (afterDate?: string) => {
+    async (afterId?: string) => {
       const url = new URL(`/api/posts`, location.origin);
       url.searchParams.set("postType", boardType);
       url.searchParams.set("limit", String(limit));
-      if (afterDate) {
-        url.searchParams.set("afterDate", afterDate);
+      if (afterId) {
+        url.searchParams.set("afterId", afterId);
       }
 
       const res = await fetch(url.toString());
@@ -51,9 +52,9 @@ const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
   useEffect(() => {
     (async () => {
       setLoading(true);
-      const data = await fetchPosts(undefined);
+      const data = await fetchPosts();
       setPostList(data);
-      setAfterDate(data.length > 0 ? data[data.length - 1].createdAt : null);
+      setAfterId(data.length > 0 ? data[data.length - 1]._id : null);
       setHasMore(data.length === limit);
       setLoading(false);
     })();
@@ -65,17 +66,17 @@ const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
     setLoading(true);
     setPostList((prev) => [...prev, ...createDummyPosts()]);
 
-    const data = await fetchPosts(afterDate ?? undefined);
+    const data = await fetchPosts(afterId ?? undefined);
 
     setPostList((prev) => {
       const filtered = prev.filter((post) => !post._id.startsWith("dummy-"));
       return [...filtered, ...data];
     });
 
-    setAfterDate(data.length > 0 ? data[data.length - 1].createdAt : null);
+    setAfterId(data.length > 0 ? data[data.length - 1]._id : null);
     setHasMore(data.length === limit);
     setLoading(false);
-  }, [isLoading, hasMore, fetchPosts, limit, createDummyPosts, afterDate]);
+  }, [isLoading, hasMore, fetchPosts, limit, createDummyPosts, afterId]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -84,9 +85,7 @@ const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
           loadMore();
         }
       },
-      {
-        threshold: 0,
-      },
+      { threshold: 0 },
     );
 
     const current = loaderRef.current;
@@ -120,6 +119,9 @@ const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
               />
             </div>
           ))}
+        </div>
+        <div className="mx-auto flex w-full justify-end p-3 md:w-3/4 lg:w-3/5">
+          <Link href={`/${boardType}/create`}>글쓰기</Link>
         </div>
       </BoardWrapper>
     </div>

@@ -1,4 +1,5 @@
 import { getClient } from "@/database/dbClient";
+import { ObjectId } from "mongodb";
 
 const COLLECTION_MAP: Record<string, string | undefined> = {
   news: process.env.NEWS_COLLECTION_NAME,
@@ -10,7 +11,7 @@ export async function GET(request: Request) {
   const url = new URL(request.url);
   const postType = url.searchParams.get("postType") || "news";
   const limit = Number(url.searchParams.get("limit") || 10);
-  const afterDate = url.searchParams.get("afterDate");
+  const afterId = url.searchParams.get("afterId");
 
   const collectionName = COLLECTION_MAP[postType];
   if (!collectionName) {
@@ -25,11 +26,11 @@ export async function GET(request: Request) {
     const db = client.db(process.env.DB_NAME);
     const collection = db.collection(collectionName);
 
-    const query = afterDate ? { createdAt: { $lt: new Date(afterDate) } } : {};
+    const query = afterId ? { _id: { $lt: new ObjectId(afterId) } } : {};
 
     const posts = await collection
       .find(query, { projection: { title: 1, content: 1, createdAt: 1 } })
-      .sort({ createdAt: -1 })
+      .sort({ _id: -1 })
       .limit(limit)
       .toArray();
 
@@ -44,9 +45,11 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
+  const url = new URL(request.url);
+  const postType = url.searchParams.get("postType") || "news";
+
   try {
     const data = await request.json();
-    const postType = data.postType || "news";
 
     if (!data.title || !data.content) {
       return new Response(
