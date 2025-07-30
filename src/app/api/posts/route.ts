@@ -1,5 +1,6 @@
 import { getClient } from "@/database/dbClient";
 import { ObjectId } from "mongodb";
+import { NextResponse } from "next/server";
 
 const COLLECTION_MAP: Record<string, string | undefined> = {
   news: process.env.NEWS_COLLECTION_NAME,
@@ -12,11 +13,12 @@ export async function GET(request: Request) {
   const postType = url.searchParams.get("postType") || "news";
   const limit = Number(url.searchParams.get("limit") || 10);
   const afterId = url.searchParams.get("afterId");
+  const beforeId = url.searchParams.get("beforeId");
 
   const collectionName = COLLECTION_MAP[postType];
   if (!collectionName) {
-    return new Response(
-      JSON.stringify({ error: "유효하지 않은 게시물 타입입니다." }),
+    return NextResponse.json(
+      { error: "유효하지 않은 게시물 타입입니다." },
       { status: 400 },
     );
   }
@@ -26,19 +28,27 @@ export async function GET(request: Request) {
     const db = client.db(process.env.DB_NAME);
     const collection = db.collection(collectionName);
 
-    const query = afterId ? { _id: { $lt: new ObjectId(afterId) } } : {};
+    const query: Record<string, unknown> = {};
+    if (afterId)
+      query._id = { ...(query._id || {}), $lt: new ObjectId(afterId) };
+    if (beforeId)
+      query._id = { ...(query._id || {}), $gt: new ObjectId(beforeId) };
+
+    const sortOrder = beforeId ? 1 : -1;
 
     const posts = await collection
       .find(query, { projection: { title: 1, content: 1, createdAt: 1 } })
-      .sort({ _id: -1 })
+      .sort({ _id: sortOrder })
       .limit(limit)
       .toArray();
 
-    return new Response(JSON.stringify(posts), { status: 200 });
+    if (beforeId) posts.reverse();
+
+    return NextResponse.json(posts);
   } catch (error) {
     console.error(error);
-    return new Response(
-      JSON.stringify({ error: "게시물을 가져오는 데 실패했습니다." }),
+    return NextResponse.json(
+      { error: "게시물을 가져오는 데 실패했습니다." },
       { status: 500 },
     );
   }

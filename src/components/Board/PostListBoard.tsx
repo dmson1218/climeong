@@ -3,7 +3,6 @@
 import BoardWrapper from "@/components/Board/BoardWrapper";
 import PostLinkWithDate from "@/components/Link/PostLinkWithDate";
 import type { Post } from "@/types/post";
-import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 interface PostListBoardProps {
@@ -11,19 +10,17 @@ interface PostListBoardProps {
   boardTitle: string;
 }
 
-const DUMMY_COUNT = 10;
+const LIMIT = 10;
 
 const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
-  const limit = DUMMY_COUNT;
-
   const [afterId, setAfterId] = useState<string | null>(null);
-  const [hasMore, setHasMore] = useState(true);
+  const [hasMoreAfter, setHasMoreAfter] = useState(true);
   const [isLoading, setLoading] = useState(true);
-  const loaderRef = useRef<HTMLAnchorElement>(null);
+  const loaderAfterRef = useRef<HTMLAnchorElement>(null);
 
   const createDummyPosts = useCallback(
     () =>
-      Array.from({ length: DUMMY_COUNT }).map((_, idx) => ({
+      Array.from({ length: LIMIT }).map((_, idx) => ({
         _id: `dummy-${idx}`,
         title: "",
         content: "",
@@ -35,38 +32,93 @@ const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
   const [postList, setPostList] = useState<Post[]>(createDummyPosts());
 
   const fetchPosts = useCallback(
-    async (afterId?: string) => {
+    async (params: { beforeId?: string; afterId?: string }) => {
       const url = new URL(`/api/posts`, location.origin);
       url.searchParams.set("postType", boardType);
-      url.searchParams.set("limit", String(limit));
-      if (afterId) {
-        url.searchParams.set("afterId", afterId);
-      }
+      url.searchParams.set("limit", String(LIMIT));
+      if (params.afterId) url.searchParams.set("afterId", params.afterId);
 
       const res = await fetch(url.toString());
-      return res.json();
+
+      const data = await res.json();
+
+      return data;
     },
-    [boardType, limit],
+    [boardType],
   );
+
+  const saveScrollState = useCallback(() => {
+    history.pushState(
+      {
+        lastId: afterId || undefined,
+        scrollY: window.scrollY,
+      },
+      "",
+    );
+  }, [afterId]);
+
+  useEffect(() => {
+    window.addEventListener("scroll", saveScrollState);
+
+    return () => {
+      window.removeEventListener("scroll", saveScrollState);
+    };
+  }, [saveScrollState]);
 
   useEffect(() => {
     (async () => {
       setLoading(true);
-      const data = await fetchPosts();
-      setPostList(data);
-      setAfterId(data.length > 0 ? data[data.length - 1]._id : null);
-      setHasMore(data.length === limit);
-      setLoading(false);
-    })();
-  }, [fetchPosts, limit]);
 
-  const loadMore = useCallback(async () => {
-    if (isLoading || !hasMore) return;
+      const lastId = history.state?.lastId ?? null;
+      const scrollY = history.state?.scrollY ?? 0;
+
+      if (!lastId) {
+        const data = await fetchPosts({
+          beforeId: undefined,
+          afterId: undefined,
+        });
+        setPostList(data);
+        setAfterId(data.length > 0 ? data[data.length - 1]._id : null);
+        setHasMoreAfter(data.length === LIMIT);
+        setLoading(false);
+        return;
+      }
+
+      let accumulated: Post[] = [];
+      let cursor: string | undefined = undefined;
+      let shouldStop = false;
+
+      while (!shouldStop) {
+        const data = await fetchPosts({ afterId: cursor });
+        if (data.length === 0) break;
+
+        accumulated = [...accumulated, ...data];
+        cursor = data[data.length - 1]._id;
+
+        if (data[0]._id >= lastId && data[data.length - 1]._id <= lastId) {
+          shouldStop = true;
+        }
+
+        if (accumulated.length > 1000) break;
+      }
+
+      setPostList(accumulated);
+      setAfterId(cursor ?? null);
+      setHasMoreAfter(accumulated.length % LIMIT === 0);
+      setLoading(false);
+      requestAnimationFrame(() => {
+        window.scrollTo({ top: scrollY, behavior: "auto" });
+      });
+    })();
+  }, [fetchPosts]);
+
+  const loadMoreAfter = useCallback(async () => {
+    if (isLoading || !hasMoreAfter) return;
 
     setLoading(true);
     setPostList((prev) => [...prev, ...createDummyPosts()]);
 
-    const data = await fetchPosts(afterId ?? undefined);
+    const data = await fetchPosts(afterId ? { afterId } : {});
 
     setPostList((prev) => {
       const filtered = prev.filter((post) => !post._id.startsWith("dummy-"));
@@ -74,38 +126,38 @@ const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
     });
 
     setAfterId(data.length > 0 ? data[data.length - 1]._id : null);
-    setHasMore(data.length === limit);
+    setHasMoreAfter(data.length === LIMIT);
     setLoading(false);
-  }, [isLoading, hasMore, fetchPosts, limit, createDummyPosts, afterId]);
+  }, [isLoading, hasMoreAfter, fetchPosts, createDummyPosts, afterId]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          loadMore();
+          loadMoreAfter();
         }
       },
       { threshold: 0 },
     );
 
-    const current = loaderRef.current;
+    const current = loaderAfterRef.current;
     if (current) observer.observe(current);
 
     return () => {
       if (current) observer.unobserve(current);
     };
-  }, [loadMore]);
+  }, [loadMoreAfter]);
 
   return (
     <div className="layout mt-20 min-h-[calc(100vh-8rem)] md:mt-24 md:min-h-[calc(100vh-9rem)]">
       <BoardWrapper>
         <div className="flex-center mb-4 h-12 text-xl">{boardTitle}</div>
-        <div className="mx-auto flex w-full max-w-3xl grow flex-col items-center">
+        <div className="mx-auto flex w-full max-w-5xl grow flex-col items-center">
           {postList.map((post, index) => (
             <div key={post._id + "-postListWrapper"} className="w-full">
               <PostLinkWithDate
                 key={post._id + "-postList"}
-                ref={index === postList.length - 1 ? loaderRef : null}
+                ref={index === postList.length - 1 ? loaderAfterRef : null}
                 boardType={boardType}
                 _id={post._id}
                 title={post.title}
@@ -119,9 +171,6 @@ const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
               />
             </div>
           ))}
-        </div>
-        <div className="mx-auto flex w-full justify-end p-3 md:w-3/4 lg:w-3/5">
-          <Link href={`/${boardType}/create`}>글쓰기</Link>
         </div>
       </BoardWrapper>
     </div>
