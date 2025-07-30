@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+   <h1> 클라이멍 </h1>
+   <h3>🧗 클라이머의, 클라이머에 의한, 클라이머를 위한 🧗</h3>
 
-## Getting Started
+<p>
+  <a href="https://climeong.vercel.app">클라이멍 홈페이지</a>
+</p>
 
-First, run the development server:
+### :round_pushpin: 바로가기
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+[프로젝트 소개](#--프로젝트-소개) &nbsp; | &nbsp; [주요 기능](#--주요-기능) &nbsp; | &nbsp; [기술 스택](#%EF%B8%8F--기술-스택) &nbsp;
+| &nbsp; [기술적 도전](#--기술적-도전) &nbsp;- [FE](#fe의-기술적-도전-과제) / [BE](#be의-기술적-도전-과제) &nbsp; | &nbsp; [시스템 아키텍처](#%EF%B8%8F--시스템-아키텍처) &nbsp; | &nbsp; [팀원 소개](#--팀원-소개)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📢 프로젝트 소개
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 클라이멍이란?
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+새로운 암벽화를 구매할 때, 어떤 브랜드의 어떤 모델을 선택해야 할지 고민이 많으셨나요? <br>
+클라이멍은 클라이머들이 실제 리뷰를 통해 선택을 도와주는 서비스입니다. <br>
+다양한 브랜드와 모델을 한눈에 확인하고, 딱 맞는 암벽화를 찾을 수 있습니다. <br>
+클라이밍의 최신 소식, 크루 홍보 등을 확인할 수 있는 커뮤니티 또한 제공합니다.
 
-## Learn More
+## 🔎 주요 기능
 
-To learn more about Next.js, take a look at the following resources:
+### 다양한 브랜드의 암벽화를 한눈에 확인하세요.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+클라이멍은 다양한 브랜드의 암벽화를 한눈에 확인할 수 있는 기능을 제공합니다. <br>
+브랜드별로 암벽화를 필터링하고, 각 브랜드의 모델을 비교할 수 있습니다. <br>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+<br>
 
-## Deploy on Vercel
+### 무한 스크롤이 적용된 친화적인 커뮤니티를 이용하세요.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+클라이멍은 클라이머들이 서로의 경험을 공유하고 소통할 수 있는 커뮤니티 공간을 제공합니다. <br>
+무한 스크롤 기능을 통해 다양한 리뷰와 정보를 손쉽게 탐색할 수 있습니다. <br>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+<br>
