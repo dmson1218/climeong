@@ -86,9 +86,9 @@ const renderSkeleton = (
     if (classString.includes("prose")) {
       return (
         <div className={`${skeletonClassString} flex flex-col gap-2`}>
-          <div className="skeleton h-5 w-full" />
-          <div className="skeleton h-5 w-full" />
-          <div className="skeleton h-5 w-5/6" />
+          <div className="skeleton h-6 w-full" />
+          <div className="skeleton h-6 w-full" />
+          <div className="skeleton h-6 w-5/6" />
         </div>
       );
     }
