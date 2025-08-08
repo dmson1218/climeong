@@ -49,7 +49,7 @@ const PostLinkWithDate = ({
       key={_id}
       ref={ref}
       href={`/${boardType}/${_id}`}
-      className="mx-6 flex h-16 grow flex-col justify-between md:h-32"
+      className="mx-2 flex h-16 grow flex-col justify-between md:mx-6 md:h-32"
     >
       {renderSkeleton(
         isLoading,

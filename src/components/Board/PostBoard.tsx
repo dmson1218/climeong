@@ -45,7 +45,7 @@ const PostBoard = ({ boardType }: PostBoardProps) => {
             {post.title}
           </div>,
         )}
-        <div className="mx-4 grow font-normal md:mx-0">
+        <div className="grow font-normal">
           <FormatContent isLoading={isLoading} content={post.content} />
         </div>
         <CommentBoard postId={id as string} />

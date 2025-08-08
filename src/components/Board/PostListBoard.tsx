@@ -167,7 +167,7 @@ const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
               />
               <hr
                 key={post._id + "-postListDivider"}
-                className="m-4 border-gray-300 md:mx-0 md:my-8"
+                className="my-4 border-gray-300 md:mx-0 md:my-8"
               />
             </div>
           ))}

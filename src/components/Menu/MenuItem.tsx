@@ -23,7 +23,7 @@ const MenuItem = ({ item, setIsOpen }: MenuItemProps) => {
       {subItems && subItemLinks ? (
         <>
           <div
-            className="block cursor-pointer px-8 py-4 hover:text-gray-400 md:px-12"
+            className="block cursor-pointer px-4 py-4 hover:text-gray-400 md:px-12"
             onClick={(e) => {
               e.stopPropagation();
               toggle();
@@ -41,7 +41,7 @@ const MenuItem = ({ item, setIsOpen }: MenuItemProps) => {
       ) : (
         <Link
           href={link || "#"}
-          className="block px-8 py-4 text-black hover:text-gray-400 md:px-12"
+          className="block px-4 py-4 text-black hover:text-gray-400 md:px-12"
           onClick={(e) => {
             e.stopPropagation();
             setIsOpen(false);

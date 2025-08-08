@@ -87,7 +87,7 @@ const CommentBoard = ({ postId }: CommentBoardProps) => {
   );
 
   return (
-    <div className="w-full p-4 font-normal md:px-0">
+    <div className="w-full py-4 font-normal">
       <div className="flex h-10 w-full resize-none overflow-hidden rounded-md border border-gray-300">
         <textarea
           ref={nicknameRef}
