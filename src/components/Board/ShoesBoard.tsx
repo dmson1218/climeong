@@ -2,32 +2,9 @@
 
 import BoardWrapper from "@/components/Board/BoardWrapper";
 import Shoe from "@/components/Shoe";
+import { shoeNames } from "@/data/shoesData";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-
-const shoeNames = [
-  "Butora_NewComet",
-  "Butora_Senegi",
-  "Butora_Spider",
-  "LaSportiva_Skwama",
-  "LaSportiva_SkwamaVegan",
-  "LaSportiva_SolutionComp",
-  "LaSportiva_Theory",
-  "MadRock_Drifter",
-  "MadRock_Drone",
-  "MadRock_DroneComp",
-  "MadRock_Rover",
-  "Scarpa_Drago",
-  "Scarpa_DragoLV",
-  "Scarpa_Veloce",
-  "Scarpa_VSR",
-  "Tenaya_Indalo",
-  "Tenaya_Oasi",
-  "Tenaya_OasiLV",
-  "Unparallel_Flagship",
-  "Unparallel_FlagshipPro",
-  "Unparallel_Qubit",
-];
 
 const CARD_WIDTH = 192;
 const GAP = 8;
