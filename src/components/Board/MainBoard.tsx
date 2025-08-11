@@ -22,7 +22,6 @@ const MainBoard = () => {
       <br />
       <BoardTitle boardType="news" title="한 발 앞서는 클라이밍 뉴스😎" />
       <PreviewBoard boardType="news" />
-
       <br />
     </div>
   );

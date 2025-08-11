@@ -3,6 +3,7 @@
 import type { Post } from "@/types/post";
 import { useEffect, useState } from "react";
 import PostLinkWithDate from "../Link/PostLinkWithDate";
+import BoardWrapper from "./BoardWrapper";
 
 const PreviewBoard = ({ boardType }: { boardType: string }) => {
   const [postList, setPostList] = useState<Post[]>(
@@ -25,24 +26,26 @@ const PreviewBoard = ({ boardType }: { boardType: string }) => {
   }, [boardType]);
 
   return (
-    <div className="mt-2 flex grow flex-col items-center md:mx-8 md:mt-4">
-      {postList.map((post) => (
-        <div key={post._id + "-postListWrapper"} className="w-full">
-          <PostLinkWithDate
-            key={post._id + "-postList"}
-            boardType={boardType}
-            _id={post._id}
-            title={post.title}
-            content={post.content}
-            createdAt={post.createdAt}
-            isLoading={isLoading}
-          />
-          <hr
-            key={post._id + "-postListDivider"}
-            className="m-4 border-gray-300 md:mx-4 md:my-6"
-          />
-        </div>
-      ))}
+    <div className="mt-2">
+      <BoardWrapper>
+        {postList.map((post) => (
+          <div key={post._id + "-postListWrapper"} className="w-full">
+            <PostLinkWithDate
+              key={post._id + "-postList"}
+              boardType={boardType}
+              _id={post._id}
+              title={post.title}
+              content={post.content}
+              createdAt={post.createdAt}
+              isLoading={isLoading}
+            />
+            <hr
+              key={post._id + "-postListDivider"}
+              className="my-4 border-gray-300 md:my-6"
+            />
+          </div>
+        ))}
+      </BoardWrapper>
     </div>
   );
 };
