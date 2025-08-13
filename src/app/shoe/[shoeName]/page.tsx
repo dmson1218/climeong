@@ -13,7 +13,7 @@ export default function ShoeNamePage() {
   return (
     <div className="layout mt-24 flex min-h-[calc(100vh-8rem)] md:min-h-[calc(100vh-9rem)]">
       <BoardWrapper>
-        <div className="flex-center mb-4 w-full flex-col gap-4 sm:flex-row">
+        <div className="flex-center mb-2 w-full flex-col gap-4 sm:flex-row">
           <div className="w-full flex-shrink-0 sm:w-1/3">
             <Image
               src={`/images/shoes/${shoeName}.jpg`}
@@ -49,7 +49,6 @@ export default function ShoeNamePage() {
             )}
           </div>
         </div>
-
         <CommentBoard postId={shoeName} />
       </BoardWrapper>
     </div>
