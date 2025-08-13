@@ -46,7 +46,7 @@ export default function ShoePage() {
                 <button
                   key={brand}
                   onClick={() => toggleBrand(brand)}
-                  className={`flex-center rounded-full px-4 py-0.5 font-medium transition-colors ${
+                  className={`flex-center rounded-full px-4 py-0.5 font-medium ${
                     selectedBrands.includes(brand)
                       ? "bg-blue-200"
                       : "bg-gray-200"
@@ -63,7 +63,7 @@ export default function ShoePage() {
                     prev === "under15" ? null : "under15",
                   )
                 }
-                className={`flex-center rounded-full px-4 py-0.5 font-medium transition-colors ${
+                className={`flex-center rounded-full px-4 py-0.5 font-medium ${
                   selectedPrice === "under15" ? "bg-blue-200" : "bg-gray-200"
                 }`}
               >
@@ -75,7 +75,7 @@ export default function ShoePage() {
                     prev === "over15" ? null : "over15",
                   )
                 }
-                className={`flex-center rounded-full px-4 py-0.5 font-medium transition-colors ${
+                className={`flex-center rounded-full px-4 py-0.5 font-medium ${
                   selectedPrice === "over15" ? "bg-blue-200" : "bg-gray-200"
                 }`}
               >
