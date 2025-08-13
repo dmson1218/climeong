@@ -1,14 +1,91 @@
+"use client";
+
 import BoardWrapper from "@/components/Board/BoardWrapper";
-import { shoeNames } from "@/data/shoesData";
+import shoesData, { brands, shoeNames } from "@/data/shoesData";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function ShoePage() {
+  const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
+  const [selectedPrice, setSelectedPrice] = useState<
+    "under15" | "over15" | null
+  >(null);
+
+  const priceFilter = (
+    price: number,
+    filter: "under15" | "over15" | null,
+  ): boolean => {
+    if (!filter) return true;
+    if (filter === "under15") return price <= 150000;
+    if (filter === "over15") return price > 150000;
+    return true;
+  };
+
+  const toggleBrand = (brand: string) => {
+    setSelectedBrands((prev) =>
+      prev.includes(brand) ? prev.filter((b) => b !== brand) : [...prev, brand],
+    );
+  };
+
+  const filteredShoes = shoeNames.filter((shoeName) => {
+    const shoe = shoesData[shoeName];
+    const brandMatch =
+      selectedBrands.length === 0 || selectedBrands.includes(shoe.brandKr);
+    const priceMatch = priceFilter(shoe.priceKr, selectedPrice);
+    return brandMatch && priceMatch;
+  });
+
   return (
-    <div className="layout mt-24 grid min-h-[calc(100vh-6rem-60px)]">
+    <div className="layout mt-20 grid min-h-[calc(100vh-6rem-60px)]">
       <BoardWrapper>
+        <div className="ml-1 flex flex-col pb-3 pr-1 pt-4">
+          <div className="flex flex-col justify-between gap-2">
+            <div className="flex w-80 flex-wrap items-center gap-2 md:w-full">
+              {brands.map((brand) => (
+                <button
+                  key={brand}
+                  onClick={() => toggleBrand(brand)}
+                  className={`flex-center rounded-full px-4 py-0.5 font-medium transition-colors ${
+                    selectedBrands.includes(brand)
+                      ? "bg-blue-200"
+                      : "bg-gray-200"
+                  }`}
+                >
+                  {brand}
+                </button>
+              ))}
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <button
+                onClick={() =>
+                  setSelectedPrice((prev) =>
+                    prev === "under15" ? null : "under15",
+                  )
+                }
+                className={`flex-center rounded-full px-4 py-0.5 font-medium transition-colors ${
+                  selectedPrice === "under15" ? "bg-blue-200" : "bg-gray-200"
+                }`}
+              >
+                15만원 이하
+              </button>
+              <button
+                onClick={() =>
+                  setSelectedPrice((prev) =>
+                    prev === "over15" ? null : "over15",
+                  )
+                }
+                className={`flex-center rounded-full px-4 py-0.5 font-medium transition-colors ${
+                  selectedPrice === "over15" ? "bg-blue-200" : "bg-gray-200"
+                }`}
+              >
+                15만원 이상
+              </button>
+            </div>
+          </div>
+        </div>
         <div className="flex flex-wrap items-center">
-          {shoeNames.map((shoeName) => (
+          {filteredShoes.map((shoeName) => (
             <div
               key={shoeName}
               className="w-1/2 flex-shrink-0 p-1 sm:w-1/3 lg:w-1/4"
