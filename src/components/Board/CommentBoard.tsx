@@ -91,7 +91,7 @@ const CommentBoard = ({ postId }: CommentBoardProps) => {
       <div className="flex h-10 w-full resize-none overflow-hidden rounded-md border border-gray-300">
         <textarea
           ref={nicknameRef}
-          className="m-2 h-6 w-20 flex-shrink-0 resize-none overflow-x-auto whitespace-nowrap border-none outline-none"
+          className="m-2 h-6 w-20 flex-shrink-0 resize-none overflow-x-auto whitespace-nowrap border-none text-center outline-none"
           wrap="off"
           placeholder="닉네임"
         />
@@ -100,7 +100,6 @@ const CommentBoard = ({ postId }: CommentBoardProps) => {
           ref={commentRef}
           className="m-2 h-6 w-full resize-none overflow-x-auto whitespace-nowrap border-none outline-none"
           wrap="off"
-          placeholder="댓글을 입력하세요"
         />
         <button
           className="h-full w-14 flex-shrink-0 cursor-pointer border-l border-gray-300 bg-gray-100 text-black"
