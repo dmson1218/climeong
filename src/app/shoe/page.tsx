@@ -1,13 +1,18 @@
 "use client";
 
 import BoardWrapper from "@/components/Board/BoardWrapper";
-import shoesData, { brands, shoeNames } from "@/data/shoesData";
+import shoesData, { brandList, shoeNames } from "@/data/shoesData";
 import Image from "next/image";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 export default function ShoePage() {
-  const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
+  const searchParams = useSearchParams();
+  const brand = searchParams.get("brand");
+  const [selectedBrands, setSelectedBrands] = useState<string[]>([
+    brandList.find((b) => b.brand === brand)?.brandKr || "All",
+  ]);
   const [selectedPrice, setSelectedPrice] = useState<
     "under15" | "over15" | null
   >(null);
@@ -42,17 +47,17 @@ export default function ShoePage() {
         <div className="ml-1 flex flex-col pb-3 pr-1 pt-4">
           <div className="flex flex-col justify-between gap-2">
             <div className="flex w-80 flex-wrap items-center gap-2 md:w-full">
-              {brands.map((brand) => (
+              {brandList.map(({ brandKr }) => (
                 <button
-                  key={brand}
-                  onClick={() => toggleBrand(brand)}
+                  key={brandKr}
+                  onClick={() => toggleBrand(brandKr)}
                   className={`flex-center rounded-full px-4 py-0.5 font-medium ${
-                    selectedBrands.includes(brand)
+                    selectedBrands.includes(brandKr)
                       ? "bg-blue-200"
                       : "bg-gray-200"
                   }`}
                 >
-                  {brand}
+                  {brandKr}
                 </button>
               ))}
             </div>

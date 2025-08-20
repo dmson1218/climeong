@@ -301,6 +301,11 @@ const shoesData = {
 export default shoesData as shoesDataType;
 export type { shoesDataType };
 export const shoeNames = Object.keys(shoesData);
-export const brands = Array.from(
-  new Set(Object.values(shoesData).map((shoe) => shoe.brandKr)),
+export const brandList = Array.from(
+  new Map(
+    Object.values(shoesData).map((shoe) => [
+      shoe.brand,
+      { brand: shoe.brand, brandKr: shoe.brandKr },
+    ]),
+  ).values(),
 );
