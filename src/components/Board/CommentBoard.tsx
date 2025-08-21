@@ -38,6 +38,7 @@ const CommentBoard = ({ postId }: CommentBoardProps) => {
       createdAt: "",
     },
   ]);
+  const [canSubmit, setCanSubmit] = useState(false);
 
   const fetchComments = useCallback(async () => {
     try {
@@ -55,6 +56,12 @@ const CommentBoard = ({ postId }: CommentBoardProps) => {
   useEffect(() => {
     fetchComments();
   }, [fetchComments]);
+
+  const handleInputChange = () => {
+    const nickname = nicknameRef.current?.value.trim() || "";
+    const content = commentRef.current?.value.trim() || "";
+    setCanSubmit(nickname.length > 0 && content.length > 0);
+  };
 
   const handleCommentSubmit = async (nickname: string, content: string) => {
     try {
@@ -91,18 +98,20 @@ const CommentBoard = ({ postId }: CommentBoardProps) => {
       <div className="flex h-10 w-full resize-none overflow-hidden rounded-md border border-gray-300">
         <textarea
           ref={nicknameRef}
-          className="m-2 h-6 w-20 flex-shrink-0 resize-none overflow-x-auto whitespace-nowrap border-none text-center outline-none"
+          className="m-2 h-6 w-16 flex-shrink-0 resize-none overflow-x-auto whitespace-nowrap border-none text-center outline-none md:w-20"
           wrap="off"
           placeholder="닉네임"
+          onChange={handleInputChange}
         />
         <p className="my-2 h-6 border-l border-gray-300" />
         <textarea
           ref={commentRef}
           className="m-2 h-6 w-full resize-none overflow-x-auto whitespace-nowrap border-none outline-none"
           wrap="off"
+          onChange={handleInputChange}
         />
         <button
-          className="h-full w-14 flex-shrink-0 cursor-pointer border-l border-gray-300 bg-gray-100 text-black"
+          className="h-full w-14 flex-shrink-0 border-l border-gray-300 bg-blue-200 text-black disabled:bg-gray-100"
           onClick={() => {
             const nickname = nicknameRef.current?.value.trim();
             const content = commentRef.current?.value.trim();
@@ -115,7 +124,9 @@ const CommentBoard = ({ postId }: CommentBoardProps) => {
             handleCommentSubmit(nickname, content);
             nicknameRef.current!.value = "";
             commentRef.current!.value = "";
+            setCanSubmit(false);
           }}
+          disabled={!canSubmit}
         >
           등록
         </button>
