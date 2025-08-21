@@ -1,6 +1,6 @@
 import BoardTitle from "@/components/Board/BoardTitle";
 import PreviewBoard from "@/components/Board/PreviewBoard";
-import ShoesBoard from "@/components/Board/ShoesBoard";
+import ShoeSlideBoard from "@/components/Board/ShoeSlideBoard";
 import BrandBoard from "./BrandBoard";
 import SNSBoard from "./SNSBoard";
 
@@ -15,7 +15,7 @@ const MainBoard = () => {
         title="새로운 암벽화 찾고 계신가요?"
         subTitle="좋아하실 만한 암벽화를 추천해 드려요."
       />
-      <ShoesBoard />
+      <ShoeSlideBoard />
       <br />
       <BoardTitle title="믿고 신는 브랜드, 여기 다 있어요!" />
       <BrandBoard />
