@@ -3,6 +3,7 @@
 import BoardWrapper from "@/components/Board/BoardWrapper";
 import PostLinkWithDate from "@/components/Link/PostLinkWithDate";
 import type { Post } from "@/types/post";
+import throttle from "@/utils/throttle";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 interface PostListBoardProps {
@@ -39,23 +40,21 @@ const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
       if (params.afterId) url.searchParams.set("afterId", params.afterId);
 
       const res = await fetch(url.toString());
-
-      const data = await res.json();
-
-      return data;
+      return res.json();
     },
     [boardType],
   );
 
-  const saveScrollState = useCallback(() => {
-    history.pushState(
+  const saveScrollState = throttle(() => {
+    history.replaceState(
       {
         lastId: afterId || undefined,
         scrollY: window.scrollY,
       },
       "",
+      location.href,
     );
-  }, [afterId]);
+  }, 500);
 
   useEffect(() => {
     window.addEventListener("scroll", saveScrollState);
@@ -73,10 +72,7 @@ const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
       const scrollY = history.state?.scrollY ?? 0;
 
       if (!lastId) {
-        const data = await fetchPosts({
-          beforeId: undefined,
-          afterId: undefined,
-        });
+        const data = await fetchPosts({});
         setPostList(data);
         setAfterId(data.length > 0 ? data[data.length - 1]._id : null);
         setHasMoreAfter(data.length === LIMIT);
@@ -106,6 +102,7 @@ const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
       setAfterId(cursor ?? null);
       setHasMoreAfter(accumulated.length % LIMIT === 0);
       setLoading(false);
+
       requestAnimationFrame(() => {
         window.scrollTo({ top: scrollY, behavior: "auto" });
       });
@@ -146,7 +143,7 @@ const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
     return () => {
       if (current) observer.unobserve(current);
     };
-  }, [loadMoreAfter]);
+  }, [loadMoreAfter, isLoading]);
 
   return (
     <div className="layout mt-20 min-h-[calc(100vh-8rem)] md:mt-24 md:min-h-[calc(100vh-9rem)]">
