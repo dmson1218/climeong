@@ -10,9 +10,9 @@ import { useState } from "react";
 const ShoeBoard = () => {
   const searchParams = useSearchParams();
   const brand = searchParams.get("brand");
-  const [selectedBrands, setSelectedBrands] = useState<string[]>([
-    brandList.find((b) => b.brand === brand)?.brandKr || "All",
-  ]);
+  const [selectedBrands, setSelectedBrands] = useState<string[]>(
+    brand ? [brandList.find((b) => b.brand === brand)?.brandKr || ""] : [],
+  );
   const [selectedPrice, setSelectedPrice] = useState<
     "under15" | "over15" | null
   >(null);
