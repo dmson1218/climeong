@@ -3,7 +3,6 @@
 import BoardWrapper from "@/components/Board/BoardWrapper";
 import PostLinkWithDate from "@/components/Link/PostLinkWithDate";
 import type { Post } from "@/types/post";
-import throttle from "@/utils/throttle";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 interface PostListBoardProps {
@@ -45,7 +44,7 @@ const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
     [boardType],
   );
 
-  const saveScrollState = throttle(() => {
+  const saveScrollState = useCallback(() => {
     history.replaceState(
       {
         lastId: afterId || undefined,
@@ -54,13 +53,13 @@ const PostListBoard = ({ boardType, boardTitle }: PostListBoardProps) => {
       "",
       location.href,
     );
-  }, 500);
+  }, [afterId]);
 
   useEffect(() => {
-    window.addEventListener("scroll", saveScrollState);
+    window.addEventListener("scrollend", saveScrollState);
 
     return () => {
-      window.removeEventListener("scroll", saveScrollState);
+      window.removeEventListener("scrollend", saveScrollState);
     };
   }, [saveScrollState]);
 
