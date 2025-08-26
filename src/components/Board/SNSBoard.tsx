@@ -68,6 +68,7 @@ const SNSBoard = () => {
               src={item.src}
               alt={item.alt}
               fill
+              priority
               className="object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
             />
             <div className="pointer-events-none absolute bottom-0 left-0 w-full px-4 py-2 text-xl text-white md:px-6 md:py-4 md:text-4xl">
