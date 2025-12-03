@@ -1,6 +1,25 @@
 import { getClient } from "@/database/dbClient";
 import { ObjectId } from "mongodb";
 import { NextResponse } from "next/server";
+import { z } from "zod";
+
+const PostBodySchema = z.object({
+  title: z.string().min(1, "제목을 입력해주세요."),
+  content: z.string().min(1, "내용을 입력해주세요."),
+});
+
+const QuerySchema = z.object({
+  postType: z.enum(["news", "community", "crew"]).optional().default("news"),
+  limit: z.coerce.number().min(1).max(50).default(10),
+  afterId: z
+    .string()
+    .regex(/^[0-9a-fA-F]{24}$/, "Invalid ID format")
+    .optional(),
+  beforeId: z
+    .string()
+    .regex(/^[0-9a-fA-F]{24}$/, "Invalid ID format")
+    .optional(),
+});
 
 const COLLECTION_MAP: Record<string, string | undefined> = {
   news: process.env.NEWS_COLLECTION_NAME,
@@ -10,18 +29,18 @@ const COLLECTION_MAP: Record<string, string | undefined> = {
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
-  const postType = url.searchParams.get("postType") || "news";
-  const limit = Number(url.searchParams.get("limit") || 10);
-  const afterId = url.searchParams.get("afterId");
-  const beforeId = url.searchParams.get("beforeId");
 
-  const collectionName = COLLECTION_MAP[postType];
-  if (!collectionName) {
+  const result = QuerySchema.safeParse(Object.fromEntries(url.searchParams));
+
+  if (!result.success) {
     return NextResponse.json(
-      { error: "유효하지 않은 게시물 타입입니다." },
+      { error: "잘못된 요청입니다.", details: result.error.flatten() },
       { status: 400 },
     );
   }
+
+  const { postType, limit, afterId, beforeId } = result.data;
+  const collectionName = COLLECTION_MAP[postType]!;
 
   try {
     const client = await getClient();
@@ -56,43 +75,50 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   const url = new URL(request.url);
-  const postType = url.searchParams.get("postType") || "news";
+  const postTypeParam = url.searchParams.get("postType") || "news";
+
+  if (!Object.keys(COLLECTION_MAP).includes(postTypeParam)) {
+    return NextResponse.json(
+      { error: "유효하지 않은 게시물 타입입니다." },
+      { status: 400 },
+    );
+  }
+  const collectionName = COLLECTION_MAP[postTypeParam]!;
 
   try {
-    const data = await request.json();
+    const body = await request.json();
 
-    if (!data.title || !data.content) {
-      return new Response(
-        JSON.stringify({ error: "필수 필드가 누락되었습니다: 제목 또는 내용" }),
+    const validation = PostBodySchema.safeParse(body);
+
+    if (!validation.success) {
+      return NextResponse.json(
+        {
+          error: "입력값이 올바르지 않습니다.",
+          details: validation.error.flatten(),
+        },
         { status: 400 },
       );
     }
 
-    const collectionName = COLLECTION_MAP[postType];
-    if (!collectionName) {
-      return new Response(
-        JSON.stringify({ error: "유효하지 않은 게시물 타입입니다." }),
-        { status: 400 },
-      );
-    }
+    const { title, content } = validation.data;
 
     const client = await getClient();
     const db = client.db(process.env.DB_NAME);
     const collection = db.collection(collectionName);
 
     const newPost = {
-      title: data.title,
-      content: data.content,
+      title,
+      content,
       createdAt: new Date(),
     };
 
     const result = await collection.insertOne(newPost);
 
-    return new Response(
-      JSON.stringify({
+    return NextResponse.json(
+      {
         message: "게시물이 성공적으로 생성되었습니다.",
         postId: result.insertedId,
-      }),
+      },
       { status: 201 },
     );
   } catch (error) {

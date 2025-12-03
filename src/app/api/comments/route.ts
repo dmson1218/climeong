@@ -1,9 +1,31 @@
 import { getClient } from "@/database/dbClient";
 import { NextResponse } from "next/server";
+import { z } from "zod";
+
+const CommentBodySchema = z.object({
+  nickname: z.string().min(1, "닉네임을 입력해주세요."),
+  content: z.string().min(1, "내용을 입력해주세요."),
+});
+
+const QuerySchema = z.object({
+  postId: z.string().optional(),
+});
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
-  const postId = url.searchParams.get("postId");
+
+  const result = QuerySchema.safeParse({
+    postId: url.searchParams.get("postId") || undefined,
+  });
+
+  if (!result.success) {
+    return NextResponse.json(
+      { error: "잘못된 요청입니다.", details: result.error.flatten() },
+      { status: 400 },
+    );
+  }
+
+  const { postId } = result.data;
 
   const collectionName = process.env.COMMENT_COLLECTION_NAME;
   if (!collectionName) {
@@ -42,19 +64,33 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   const url = new URL(request.url);
-  const postId = url.searchParams.get("postId");
+  const rawPostId = url.searchParams.get("postId");
+
+  const queryResult = QuerySchema.safeParse({ postId: rawPostId });
+  if (!queryResult.success || !queryResult.data.postId) {
+    return NextResponse.json(
+      { error: "유효하지 않은 Post ID입니다." },
+      { status: 400 },
+    );
+  }
+  const postId = queryResult.data.postId;
 
   try {
-    const data = await request.json();
+    const body = await request.json();
 
-    if (!data.nickname || !data.content) {
+    const validation = CommentBodySchema.safeParse(body);
+
+    if (!validation.success) {
       return new Response(
         JSON.stringify({
-          error: "필수 필드가 누락되었습니다: 닉네임 또는 내용",
+          error: "입력값이 올바르지 않습니다.",
+          details: validation.error.flatten(),
         }),
         { status: 400 },
       );
     }
+
+    const { nickname, content } = validation.data;
 
     const collectionName = process.env.COMMENT_COLLECTION_NAME;
     if (!collectionName) {
@@ -70,8 +106,8 @@ export async function POST(request: Request) {
 
     const newComment = {
       postId,
-      nickname: data.nickname,
-      content: data.content,
+      nickname,
+      content,
       createdAt: new Date(),
     };
 
